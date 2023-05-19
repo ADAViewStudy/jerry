@@ -10,10 +10,10 @@ import SwiftUI
 struct AlarmView: View {
     
     @State var alarmArr: [Alarm] = [
-        Alarm(time: "1", cycle: "2", label: "3", sound: "4", reTime: "5"),
-        Alarm(time: "12", cycle: "22", label: "32", sound: "42", reTime: "52"),
-        Alarm(time: "13", cycle: "23", label: "33", sound: "43", reTime: "53"),
-        Alarm(time: "14", cycle: "24", label: "34", sound: "44", reTime: "54")
+        Alarm(mainTime: Date(), cycle: "2", label: "3", sound: "4", reTime: false),
+        Alarm(mainTime: Date(), cycle: "22", label: "32", sound: "42", reTime: false),
+        Alarm(mainTime: Date(), cycle: "23", label: "33", sound: "43", reTime: false),
+        Alarm(mainTime: Date(), cycle: "24", label: "34", sound: "44", reTime: false)
     ]
     @State var isShowAddView: Bool = false
     
@@ -109,24 +109,28 @@ struct AlarmListView: View {
     @State var isOn: Bool = false
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("오후")
-                    .offset(y: 7)
-                    .font(.system(size: 35))
-                Text("10:09")
-                    .font(.system(size: 45))
-                Spacer()
-                Toggle(isOn: $isOn) {
-                    Text("")
+        HStack {
+            VStack(alignment: .leading) {
+                HStack() {
+                    VStack{
+                        Text(alarmArr.meridiem)
+                            .font(.system(size: 33))
+                    }
+                    VStack{
+                        Text(alarmArr.time)
+                            .font(.system(size: 45))
+                        Spacer()
+                    }
                 }
-            }
-            HStack {
-                Text("알람")
-                Spacer()
-            }
+                HStack{
+                    Text("알람")
+                    Spacer()
+                }
+            }.padding(.leading)
+            .foregroundColor(isOn ? .white : .gray)
+            Divider()
+            Toggle(isOn: $isOn) {}
+                .padding(.trailing)
         }
-        .foregroundColor(isOn ? .white : .gray)
-        Divider()
     }
 }

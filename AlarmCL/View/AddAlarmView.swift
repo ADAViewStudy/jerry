@@ -65,6 +65,7 @@ struct AddAlarmView: View {
                         //handleApendAlarm
                     } label: {
                         Text("저장")
+                            .bold()
                     }
                 }
                 
