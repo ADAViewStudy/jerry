@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		864A22372A18A0F30076BB16 /* SoundSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A22362A18A0F30076BB16 /* SoundSelectView.swift */; };
 		869C379B2A13A8C500C1034B /* AlarmCLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C379A2A13A8C500C1034B /* AlarmCLApp.swift */; };
 		869C379D2A13A8C500C1034B /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C379C2A13A8C500C1034B /* MainTabView.swift */; };
 		869C379F2A13A8C600C1034B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869C379E2A13A8C600C1034B /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		869C37CF2A13B77F00C1034B /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37CE2A13B77F00C1034B /* Alarm.swift */; };
 		869C37D12A13C4FA00C1034B /* AddAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D02A13C4FA00C1034B /* AddAlarmView.swift */; };
 		869C37D52A173E0000C1034B /* TimeFomatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D42A173E0000C1034B /* TimeFomatter.swift */; };
+		869C37D72A18976800C1034B /* FreqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D62A18976800C1034B /* FreqView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		864A22362A18A0F30076BB16 /* SoundSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSelectView.swift; sourceTree = "<group>"; };
 		869C37972A13A8C500C1034B /* AlarmCL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmCL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869C379A2A13A8C500C1034B /* AlarmCLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCLApp.swift; sourceTree = "<group>"; };
 		869C379C2A13A8C500C1034B /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 		869C37CE2A13B77F00C1034B /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		869C37D02A13C4FA00C1034B /* AddAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmView.swift; sourceTree = "<group>"; };
 		869C37D42A173E0000C1034B /* TimeFomatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFomatter.swift; sourceTree = "<group>"; };
+		869C37D62A18976800C1034B /* FreqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreqView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,8 @@
 				869C379C2A13A8C500C1034B /* MainTabView.swift */,
 				869C37CA2A13A9EF00C1034B /* AlarmView.swift */,
 				869C37D02A13C4FA00C1034B /* AddAlarmView.swift */,
+				869C37D62A18976800C1034B /* FreqView.swift */,
+				864A22362A18A0F30076BB16 /* SoundSelectView.swift */,
 				869C37C42A13A9BF00C1034B /* WorldTimeView.swift */,
 				869C37C62A13A9CB00C1034B /* StopWatchView.swift */,
 				869C37C82A13A9D300C1034B /* TimerView.swift */,
@@ -302,8 +308,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				864A22372A18A0F30076BB16 /* SoundSelectView.swift in Sources */,
 				869C37C92A13A9D300C1034B /* TimerView.swift in Sources */,
 				869C37D52A173E0000C1034B /* TimeFomatter.swift in Sources */,
+				869C37D72A18976800C1034B /* FreqView.swift in Sources */,
 				869C379D2A13A8C500C1034B /* MainTabView.swift in Sources */,
 				869C379B2A13A8C500C1034B /* AlarmCLApp.swift in Sources */,
 				869C37C72A13A9CB00C1034B /* StopWatchView.swift in Sources */,

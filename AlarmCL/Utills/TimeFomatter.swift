@@ -16,6 +16,6 @@ var timeFormatter : DateFormatter {
 var meridiemFormatter: DateFormatter {
     let formatter = DateFormatter()
     formatter.dateStyle = .none
-    formatter.dateFormat = "a"
+    formatter.dateFormat = "aa"
     return formatter
 }

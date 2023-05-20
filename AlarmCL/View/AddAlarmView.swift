@@ -13,7 +13,10 @@ struct AddAlarmView: View {
     
     @State private var selectedTime = Date()
     @State private var labelText = ""
-    @State var isOn: Bool = false
+    @State var isOn = true
+    
+    @Binding var alarmArr: [Alarm]
+    @State var newAlarm: Alarm = Alarm(mainTime: Date(), cycle: [], label: "", sound: "", reTime: false)
     
     var body: some View {
         NavigationStack {
@@ -22,15 +25,24 @@ struct AddAlarmView: View {
                     .labelsHidden() // Hides the label
                     .datePickerStyle(WheelDatePickerStyle())
                 List {
-                    Button {
-                        //handleShowFrequencyView
+                    NavigationLink {
+                        FreqView(newAlarm: $newAlarm)
+                            .navigationTitle("반복")
                     } label: {
                         HStack {
                             Text("반복")
                                 .foregroundColor(.white)
                             Spacer()
-                            Text("안함")
-                            Image(systemName: "chevron.right")
+                            if newAlarm.cycle.isEmpty {
+                                Text("안함")
+                            } else if newAlarm.cycle.count == 7{
+                                Text("매일")
+                            }
+                            else {
+                                ForEach(newAlarm.cycle.indices, id: \.self) { index in
+                                    Text(newAlarm.cycle[index].prefix(1))
+                                }
+                            }
                         }
                         .foregroundColor(.gray)
                     }
@@ -39,18 +51,20 @@ struct AddAlarmView: View {
                         TextField("알람", text: $labelText)
                             .multilineTextAlignment(.trailing)
                     }
-                    Button {
-                        //handleShowFrequencyView
+                    NavigationLink {
+                        SoundSelectView()
+                            .navigationTitle("사운드")
                     } label: {
                         HStack {
                             Text("사운드")
                                 .foregroundColor(.white)
                             Spacer()
                             Text("전파 탐지기")
-                            Image(systemName: "chevron.right")
                         }
                         .foregroundColor(.gray)
                     }
+                    
+
                     HStack {
                         Text("다시 알림")
                         Toggle(isOn: $isOn) {
@@ -62,7 +76,7 @@ struct AddAlarmView: View {
             .toolbar() {
                 ToolbarItem {
                     Button {
-                        //handleApendAlarm
+                        handleApendAlarm()
                     } label: {
                         Text("저장")
                             .bold()
@@ -81,13 +95,22 @@ struct AddAlarmView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
-}
-
-
-struct AddAlarmView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddAlarmView()
-            .environment(\.colorScheme, .dark)
-            .accentColor(Color.orange)
+    
+    func handleApendAlarm() {
+        newAlarm.mainTime = selectedTime
+        newAlarm.reTime = isOn
+        newAlarm.label = labelText.isEmpty ? "알람":labelText
+        alarmArr.append(newAlarm)
+//        print(String(alarmArr.endIndex))
+        dismiss()
     }
 }
+
+
+//struct AddAlarmView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddAlarmView()
+//            .environment(\.colorScheme, .dark)
+//            .accentColor(Color.orange)
+//    }
+//}
