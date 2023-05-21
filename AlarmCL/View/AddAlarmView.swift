@@ -19,6 +19,8 @@ struct AddAlarmView: View {
     var onAdd: ((Alarm) -> Void)? = nil
     var onEdit: ((Alarm) -> Void)? = nil
     var alarmToEdit: Alarm? = nil
+    var onDel: ((Alarm) -> Void)? = nil
+    
     @State var newAlarm: Alarm = Alarm(mainTime: Date(), cycle: [], label: "", sound: "", reTime: false)
     
     var body: some View {
@@ -78,7 +80,8 @@ struct AddAlarmView: View {
                     if alarmToEdit != nil {
                         Section {
                             Button {
-                                //handleDeletAlarm
+                                onDel!(alarmToEdit!)
+                                dismiss()
                             } label: {
                                 HStack(alignment: .center) {
                                     Spacer()
@@ -132,7 +135,7 @@ struct AddAlarmView: View {
     func handleAppendAlarm() {
         newAlarm.mainTime = selectedTime
         newAlarm.reTime = isOn
-        newAlarm.label = labelText.isEmpty ? "알람":labelText
+        newAlarm.label = labelText
         onAdd?(newAlarm)
         dismiss()
     }
@@ -140,7 +143,7 @@ struct AddAlarmView: View {
     func handleEditAlarm() {
         newAlarm.mainTime = selectedTime
         newAlarm.reTime = isOn
-        newAlarm.label = labelText.isEmpty ? "알람":labelText
+        newAlarm.label = labelText
         onEdit?(newAlarm)
         dismiss()
     }

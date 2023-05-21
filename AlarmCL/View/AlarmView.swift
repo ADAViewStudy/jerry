@@ -35,7 +35,9 @@ struct AlarmView: View {
                 
                 Section {
                     ForEach(alarmArr.indices, id: \.self) { index in
-                        AlarmListView(alarm: $alarmArr[index])
+                        AlarmListView(alarm: $alarmArr[index]) { alarm in
+                            alarmArr.remove(at: index)
+                        }
                     }
                     .onDelete { index in
                         alarmArr.remove(atOffsets: index)
@@ -118,6 +120,9 @@ struct AlarmListView: View {
     
     @Binding var alarm: Alarm
     @State var isShow = false
+    
+    var onDel: ((Alarm) -> Void)? = nil
+    
     var body: some View {
         Button {
             isShow = true
@@ -135,7 +140,7 @@ struct AlarmListView: View {
                         }
                     }
                     HStack {
-                        Text(alarm.label + (alarm.cycle.isEmpty ? "":","))
+                        Text(alarm.label == "" ?  "알람":alarm.label + (alarm.cycle.isEmpty ? "":","))
                             .fixedSize(horizontal: true, vertical: false)
                         
                         ForEach(alarm.cycle.indices, id: \.self) { index in
@@ -156,8 +161,9 @@ struct AlarmListView: View {
             AddAlarmView(onEdit: { new in
                 let editAlarm = Alarm(mainTime: new.mainTime, cycle: new.cycle, label: new.label, sound: new.sound, reTime: new.reTime)
                 alarm = editAlarm
-                
-            }, alarmToEdit: alarm)
+            }, alarmToEdit: alarm, onDel: { Alarm in
+                onDel!(Alarm)
+            })
             .environment(\.colorScheme, .dark)
             .accentColor(Color.orange)
         }
