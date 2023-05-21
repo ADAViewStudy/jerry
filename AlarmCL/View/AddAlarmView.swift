@@ -14,8 +14,11 @@ struct AddAlarmView: View {
     @State private var selectedTime = Date()
     @State private var labelText = ""
     @State var isOn = true
+    @State private var firstAppear = true
     
-    @Binding var alarmArr: [Alarm]
+    var onAdd: ((Alarm) -> Void)? = nil
+    var onEdit: ((Alarm) -> Void)? = nil
+    var alarmToEdit: Alarm? = nil
     @State var newAlarm: Alarm = Alarm(mainTime: Date(), cycle: [], label: "", sound: "", reTime: false)
     
     var body: some View {
@@ -46,11 +49,13 @@ struct AddAlarmView: View {
                         }
                         .foregroundColor(.gray)
                     }
+                    
                     HStack {
                         Text("레이블")
                         TextField("알람", text: $labelText)
                             .multilineTextAlignment(.trailing)
                     }
+                    
                     NavigationLink {
                         SoundSelectView()
                             .navigationTitle("사운드")
@@ -64,19 +69,47 @@ struct AddAlarmView: View {
                         .foregroundColor(.gray)
                     }
                     
-
                     HStack {
                         Text("다시 알림")
                         Toggle(isOn: $isOn) {
                             
                         }
                     }
+                    if alarmToEdit != nil {
+                        Section {
+                            Button {
+                                //handleDeletAlarm
+                            } label: {
+                                HStack(alignment: .center) {
+                                    Spacer()
+                                    Text("알람 삭제")
+                                        .foregroundColor(.red)
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
                 }
+                .onAppear() {
+                    if firstAppear, let alarm = alarmToEdit {
+                        newAlarm = alarm
+                        selectedTime = alarm.mainTime
+                        labelText = alarm.label
+                        isOn = alarm.reTime
+                        firstAppear = false
+                    }
+                }
+                
+                
             }
             .toolbar() {
                 ToolbarItem {
                     Button {
-                        handleApendAlarm()
+                        if let alarm = alarmToEdit {
+                            handleEditAlarm()
+                        } else {
+                            handleAppendAlarm()
+                        }
                     } label: {
                         Text("저장")
                             .bold()
@@ -91,26 +124,25 @@ struct AddAlarmView: View {
                     }
                 }
             }
-            .navigationTitle("알람 추가")
+            .navigationTitle(alarmToEdit != nil ? "알람 편집" : "알람 추가")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
     
-    func handleApendAlarm() {
+    func handleAppendAlarm() {
         newAlarm.mainTime = selectedTime
         newAlarm.reTime = isOn
         newAlarm.label = labelText.isEmpty ? "알람":labelText
-        alarmArr.append(newAlarm)
-//        print(String(alarmArr.endIndex))
+        onAdd?(newAlarm)
+        dismiss()
+    }
+    
+    func handleEditAlarm() {
+        newAlarm.mainTime = selectedTime
+        newAlarm.reTime = isOn
+        newAlarm.label = labelText.isEmpty ? "알람":labelText
+        onEdit?(newAlarm)
         dismiss()
     }
 }
 
-
-//struct AddAlarmView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddAlarmView()
-//            .environment(\.colorScheme, .dark)
-//            .accentColor(Color.orange)
-//    }
-//}
