@@ -52,5 +52,10 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+    func deleteAlarm(alarm: Alarm, context: NSManagedObjectContext) {
+            context.delete(alarm)
+            save(context: context)
+        }
+    
     
 }

@@ -69,8 +69,10 @@ struct AddAlarmView: View {
                     if alarm != nil {
                         Section {
                             Button {
-//                                onDel!(alarmToEdit!)
-//                                dismiss()
+                                if let alarmToDelete = alarm {
+                                    DataController.shared.deleteAlarm(alarm: alarmToDelete, context: managedObjContext)
+                                    dismiss()
+                                }
                             } label: {
                                 HStack(alignment: .center) {
                                     Spacer()
