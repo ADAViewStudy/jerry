@@ -6,13 +6,13 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AlarmView: View {
     
-    @State var alarmArr: [Alarm] = [
-//                Alarm(mainTime: Date(), cycle: [], label: "알람", sound: "4", reTime: false),
-                Alarm(mainTime: Date(), cycle: ["월","일"], label: "람람", sound: "44", reTime: false)
-    ]
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.time, ascending: true)]) var alarms: FetchedResults<Alarm>
+    
     @State var isShow: Bool = false
     @State private var editMode: EditMode = .inactive
     
@@ -34,30 +34,21 @@ struct AlarmView: View {
                 }
                 
                 Section {
-                    ForEach(alarmArr.indices, id: \.self) { index in
-                        AlarmListView(alarm: $alarmArr[index]) { alarm in
-                            alarmArr.remove(at: index)
-                        }
+                    ForEach(alarms) { alarm in
+                        AlarmListView(alarm: alarm)
                     }
-                    .onDelete { index in
-                        alarmArr.remove(atOffsets: index)
-                    }
+                    .onDelete(perform: deleteAlarm)
                 } header: {
-                    if !alarmArr.isEmpty {
+                    if !alarms.isEmpty {
                         Text("기타")
                             .font(.title2.bold())
                             .foregroundColor(.white)
                     }
                 }
             }
-//            .onAppear() {
-//                alarmArr.sort { $0.mainTime < $1.mainTime }
-//                print("DEBUG: Sorted !!!!!")
-//
-//            }
-            .onChange(of: alarmArr, perform: { newValue in
-                alarmArr.sort { $0.mainTime < $1.mainTime }
-            })
+            //            .onChange(of: alarmArr, perform: { newValue in
+            //                alarmArr.sort { $0.mainTime < $1.mainTime }
+            //            })
             .listStyle(.plain)
             .navigationTitle("알람")
             .navigationBarTitleDisplayMode(.automatic)
@@ -75,12 +66,9 @@ struct AlarmView: View {
                 }
             }
             .sheet(isPresented: $isShow) {
-                AddAlarmView() { new in
-                    let alarm = Alarm(mainTime: new.mainTime, cycle: new.cycle, label: new.label, sound: new.sound, reTime: new.reTime)
-                    alarmArr.append(alarm)
-                }
-                .environment(\.colorScheme, .dark) // here you can switch between .light and .dark
-                .accentColor(Color.orange) // here you can set your custom color
+                AddAlarmView()
+                    .environment(\.colorScheme, .dark)
+                    .accentColor(Color.orange)
             }
         }
     }
@@ -105,6 +93,12 @@ struct AlarmView: View {
             
         }
     }
+    private func deleteAlarm(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { alarms[$0] }.forEach(managedObjContext.delete)
+            DataController.shared.save(context: managedObjContext)
+        }
+    }
     
 }
 
@@ -116,56 +110,4 @@ struct AlarmView_Previews: PreviewProvider {
     }
 }
 
-struct AlarmListView: View {
-    
-    @Binding var alarm: Alarm
-    @State var isShow = false
-    
-    var onDel: ((Alarm) -> Void)? = nil
-    
-    var body: some View {
-        Button {
-            isShow = true
-        } label: {
-            HStack {
-                VStack(alignment: .leading) {
-                    HStack(alignment: .firstTextBaseline) {
-                        Text(alarm.meridiem)
-                            .font(.system(size: 33))
-                            .fixedSize(horizontal: true, vertical: false)
-                        ZStack {
-                            Text(alarm.time)
-                                .font(.system(size: 45))
-                                .fixedSize(horizontal: true, vertical: false)
-                        }
-                    }
-                    HStack {
-                        Text(alarm.label == "" ?  "알람":alarm.label + (alarm.cycle.isEmpty ? "":","))
-                            .fixedSize(horizontal: true, vertical: false)
-                        
-                        ForEach(alarm.cycle.indices, id: \.self) { index in
-                            if !alarm.cycle.isEmpty {
-                                Text(alarm.cycle[index])
-                                    .fixedSize(horizontal: true, vertical: false)
-                            }
-                        }
-                        Spacer()
-                    }
-                }
-                .foregroundColor(alarm.reTime ? .white : .gray)
-                Toggle(isOn: $alarm.reTime) {}
-                    .padding(.trailing)
-            }
-        }
-        .sheet(isPresented: $isShow) {
-            AddAlarmView(onEdit: { new in
-                let editAlarm = Alarm(mainTime: new.mainTime, cycle: new.cycle, label: new.label, sound: new.sound, reTime: new.reTime)
-                alarm = editAlarm
-            }, alarmToEdit: alarm, onDel: { Alarm in
-                onDel!(Alarm)
-            })
-            .environment(\.colorScheme, .dark)
-            .accentColor(Color.orange)
-        }
-    }
-}
+

@@ -9,19 +9,16 @@ import SwiftUI
 
 struct AddAlarmView: View {
     
+    @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.dismiss) var dismiss
     
     @State private var selectedTime = Date()
     @State private var labelText = ""
     @State var isOn = true
     @State private var firstAppear = true
+    @State private var freqency = ""
     
-    var onAdd: ((Alarm) -> Void)? = nil
-    var onEdit: ((Alarm) -> Void)? = nil
-    var alarmToEdit: Alarm? = nil
-    var onDel: ((Alarm) -> Void)? = nil
-    
-    @State var newAlarm: Alarm = Alarm(mainTime: Date(), cycle: [], label: "", sound: "", reTime: false)
+    var alarm: FetchedResults<Alarm>.Element? = nil
     
     var body: some View {
         NavigationStack {
@@ -31,23 +28,15 @@ struct AddAlarmView: View {
                     .datePickerStyle(WheelDatePickerStyle())
                 List {
                     NavigationLink {
-                        FreqView(newAlarm: $newAlarm)
+                        FreqView(freq: $freqency)
                             .navigationTitle("반복")
                     } label: {
                         HStack {
                             Text("반복")
                                 .foregroundColor(.white)
                             Spacer()
-                            if newAlarm.cycle.isEmpty {
-                                Text("안함")
-                            } else if newAlarm.cycle.count == 7{
-                                Text("매일")
-                            }
-                            else {
-                                ForEach(newAlarm.cycle.indices, id: \.self) { index in
-                                    Text(newAlarm.cycle[index].prefix(1))
-                                }
-                            }
+                            Text(freqency == "" ? "안함":freqency)
+                            
                         }
                         .foregroundColor(.gray)
                     }
@@ -77,11 +66,11 @@ struct AddAlarmView: View {
                             
                         }
                     }
-                    if alarmToEdit != nil {
+                    if alarm != nil {
                         Section {
                             Button {
-                                onDel!(alarmToEdit!)
-                                dismiss()
+//                                onDel!(alarmToEdit!)
+//                                dismiss()
                             } label: {
                                 HStack(alignment: .center) {
                                     Spacer()
@@ -94,11 +83,11 @@ struct AddAlarmView: View {
                     }
                 }
                 .onAppear() {
-                    if firstAppear, let alarm = alarmToEdit {
-                        newAlarm = alarm
-                        selectedTime = alarm.mainTime
-                        labelText = alarm.label
-                        isOn = alarm.reTime
+                    if firstAppear, let alarma = alarm {
+                        selectedTime = alarma.time ?? Date()
+                        labelText = alarma.label ?? "Error !"
+                        isOn = alarma.enable
+                        freqency = alarma.freq!
                         firstAppear = false
                     }
                 }
@@ -108,7 +97,7 @@ struct AddAlarmView: View {
             .toolbar() {
                 ToolbarItem {
                     Button {
-                        if let alarm = alarmToEdit {
+                        if alarm != nil {
                             handleEditAlarm()
                         } else {
                             handleAppendAlarm()
@@ -127,24 +116,18 @@ struct AddAlarmView: View {
                     }
                 }
             }
-            .navigationTitle(alarmToEdit != nil ? "알람 편집" : "알람 추가")
+            .navigationTitle(alarm != nil ? "알람 편집" : "알람 추가")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
     
     func handleAppendAlarm() {
-        newAlarm.mainTime = selectedTime
-        newAlarm.reTime = isOn
-        newAlarm.label = labelText
-        onAdd?(newAlarm)
+        DataController.shared.addAlarm(time: selectedTime, label: labelText, freq: freqency, sound: "sound", enable: isOn, context: managedObjContext)
         dismiss()
     }
     
     func handleEditAlarm() {
-        newAlarm.mainTime = selectedTime
-        newAlarm.reTime = isOn
-        newAlarm.label = labelText
-        onEdit?(newAlarm)
+        DataController.shared.editAlarm(alarm: alarm!, time: selectedTime, label: labelText, freq: freqency, sound: "sound", enable: isOn, context: managedObjContext)
         dismiss()
     }
 }

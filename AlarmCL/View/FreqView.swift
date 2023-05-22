@@ -9,9 +9,10 @@ import SwiftUI
 
 struct FreqView: View {
     
+    
     var daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"]
     @State private var selectedDays = Set<String>()
-    @Binding var newAlarm: Alarm
+    @Binding var freq: String
     
     var body: some View {
         List(daysOfWeek, id: \.self) { day in
@@ -33,14 +34,29 @@ struct FreqView: View {
             .foregroundColor(.primary)
         }
         .onDisappear() {
-            newAlarm.cycle = Array(selectedDays)
-            newAlarm.sortWeek()
+            freq = arrayToString(array: sortWeek(cycle: Array(selectedDays)))
         }
         .onAppear() {
-            selectedDays = Set(newAlarm.cycle)
+            selectedDays = Set(stringToArray(string: freq))
         }
         
     }
+    func stringToArray(string: String) -> [String] {
+        return string.components(separatedBy: " ")
+    }
+
+    func arrayToString(array: [String]) -> String {
+        return array.joined(separator: " ")
+    }
+    func sortWeek(cycle: [String]) -> [String] {
+        let arr = cycle.sorted {
+            guard let first = weekOrder.firstIndex(of: $0), let second = weekOrder.firstIndex(of: $1) else { return false }
+            return first < second
+        }
+        return arr
+    }
+
+
 }
 
 
