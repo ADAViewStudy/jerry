@@ -16,6 +16,7 @@ var timeFormatter : DateFormatter {
 var meridiemFormatter: DateFormatter {
     let formatter = DateFormatter()
     formatter.dateStyle = .none
+    formatter.locale = Locale(identifier: "ko_KR")
     formatter.dateFormat = "aa"
     return formatter
 }
