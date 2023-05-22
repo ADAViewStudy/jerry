@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddAlarmView: View {
+struct DetailAlarmView: View {
     
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.dismiss) var dismiss
@@ -85,11 +85,11 @@ struct AddAlarmView: View {
                     }
                 }
                 .onAppear() {
-                    if firstAppear, let alarma = alarm {
-                        selectedTime = alarma.time ?? Date()
-                        labelText = alarma.label ?? "Error !"
-                        isOn = alarma.enable
-                        freqency = alarma.freq!
+                    if firstAppear, let alarm = alarm {
+                        selectedTime = alarm.time!
+                        labelText = alarm.label!
+                        isOn = alarm.enable
+                        freqency = alarm.freq!
                         firstAppear = false
                     }
                 }
@@ -129,7 +129,8 @@ struct AddAlarmView: View {
     }
     
     func handleEditAlarm() {
-        DataController.shared.editAlarm(alarm: alarm!, time: selectedTime, label: labelText, freq: freqency, sound: "sound", enable: isOn, context: managedObjContext)
+        guard let alarm = alarm else { return }
+        DataController.shared.editAlarm(alarm: alarm, time: selectedTime, label: labelText, freq: freqency, sound: "sound", enable: isOn, context: managedObjContext)
         dismiss()
     }
 }

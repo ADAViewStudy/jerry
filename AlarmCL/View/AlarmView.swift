@@ -66,7 +66,7 @@ struct AlarmView: View {
                 }
             }
             .sheet(isPresented: $isShow) {
-                AddAlarmView()
+                DetailAlarmView()
                     .environment(\.colorScheme, .dark)
                     .accentColor(Color.orange)
             }
