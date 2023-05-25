@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class DataController: ObservableObject {
     static let shared = DataController()
@@ -60,6 +61,35 @@ class DataController: ObservableObject {
             context.delete(alarm)
             save(context: context)
         }
+    
+    func deleteAlarmIndex(alarms: FetchedResults<Alarm> ,offsets: IndexSet, context: NSManagedObjectContext) {
+        withAnimation {
+            offsets.map { alarms[$0] }.forEach(context.delete)
+            save(context: context)
+        }
+    }
+    
+    func addWorldTime(time: Date, location: String, context: NSManagedObjectContext) {
+        let world = WorldTime(context: context)
+        world.id = UUID()
+        world.time = time
+        world.location = location
+        
+        save(context: context)
+    }
+    
+    func editWorldTime(worldTime: WorldTime, time: Date, location: String, context: NSManagedObjectContext) {
+        worldTime.time = time
+        worldTime.location = location
+        
+        save(context: context)
+    }
+    
+    func deleteWorldTime(worldTime: WorldTime, context: NSManagedObjectContext) {
+            context.delete(worldTime)
+            save(context: context)
+        }
+
     
     
 }

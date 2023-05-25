@@ -10,15 +10,15 @@ import SwiftUI
 struct WorldTimeView: View {
     
     @Environment(\.managedObjectContext) var managedObjContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.time, ascending: true)]) var alarms: FetchedResults<Alarm>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \WorldTime.time, ascending: true)]) var worldtimes: FetchedResults<WorldTime>
     
     @State private var isShow = false
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(alarms) { alarm in
-                    AlarmListView(alarm: alarm)
+                ForEach(worldtimes) { time in
+                    Text(time.location ?? "메롱")
                 }
 //                .onDelete(perform: <#T##Optional<(IndexSet) -> Void>##Optional<(IndexSet) -> Void>##(IndexSet) -> Void#>)
 //                .onMove(perform: <#T##Optional<(IndexSet, Int) -> Void>##Optional<(IndexSet, Int) -> Void>##(IndexSet, Int) -> Void#>)
@@ -37,6 +37,7 @@ struct WorldTimeView: View {
                     EditButton()
                 }
             }
+            .listStyle(.plain)
         }
         .sheet(isPresented: $isShow) {
             AddWorldTime()

@@ -36,7 +36,9 @@ struct AlarmView: View {
                     ForEach(alarms) { alarm in
                         AlarmListView(alarm: alarm)
                     }
-                    .onDelete(perform: deleteAlarm)
+                    .onDelete { index in
+                        DataController.shared.deleteAlarmIndex(alarms: alarms, offsets: index, context: managedObjContext)
+                    }
                 } header: {
                     if !alarms.isEmpty {
                         Text("기타")
@@ -90,12 +92,6 @@ struct AlarmView: View {
                     )
             }
             
-        }
-    }
-    private func deleteAlarm(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { alarms[$0] }.forEach(managedObjContext.delete)
-            DataController.shared.save(context: managedObjContext)
         }
     }
     
