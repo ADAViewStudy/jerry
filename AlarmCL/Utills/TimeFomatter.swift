@@ -22,3 +22,19 @@ var meridiemFormatter: DateFormatter {
     formatter.dateFormat = "aa"
     return formatter
 }
+
+func stringToArray(string: String) -> [String] {
+    return string.components(separatedBy: " ")
+}
+
+func arrayToString(array: [String]) -> String {
+    return array.joined(separator: " ")
+}
+
+func sortWeek(cycle: [String]) -> [String] {
+    let arr = cycle.sorted {
+        guard let first = weekOrder.firstIndex(of: $0), let second = weekOrder.firstIndex(of: $1) else { return false }
+        return first < second
+    }
+    return arr
+}

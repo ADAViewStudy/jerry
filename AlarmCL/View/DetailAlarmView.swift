@@ -56,7 +56,7 @@ struct DetailAlarmView: View {
                             Text("사운드")
                                 .foregroundColor(.white)
                             Spacer()
-                            Text(sound)
+                            Text(sound == "" ? "전파 탐지기":sound)
                         }
                         .foregroundColor(.gray)
                     }
@@ -89,7 +89,7 @@ struct DetailAlarmView: View {
                     if firstAppear, let alarm = alarm {
                         selectedTime = alarm.time!
                         labelText = alarm.label!
-                        isOn = alarm.enable
+                        isOn = alarm.reAlarm
                         freqency = alarm.freq!
                         sound = alarm.sound!
                         firstAppear = false
@@ -126,13 +126,13 @@ struct DetailAlarmView: View {
     }
     
     func handleAppendAlarm() {
-        DataController.shared.addAlarm(time: selectedTime, label: labelText, freq: freqency, sound: sound, enable: isOn, context: managedObjContext)
+        DataController.shared.addAlarm(time: selectedTime, label: labelText, freq: freqency, sound: sound, enable: true, reAlarm: isOn, context: managedObjContext)
         dismiss()
     }
     
     func handleEditAlarm() {
         guard let alarm = alarm else { return }
-        DataController.shared.editAlarm(alarm: alarm, time: selectedTime, label: labelText, freq: freqency, sound: sound, enable: isOn, context: managedObjContext)
+        DataController.shared.editAlarm(alarm: alarm, time: selectedTime, label: labelText, freq: freqency, sound: sound, enable: alarm.enable, reAlarm: isOn, context: managedObjContext)
         dismiss()
     }
 }

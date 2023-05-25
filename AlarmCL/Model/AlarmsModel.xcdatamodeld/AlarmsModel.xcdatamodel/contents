@@ -5,6 +5,7 @@
         <attribute name="freq" optional="YES" attributeType="String" defaultValueString="없음"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="label" optional="YES" attributeType="String"/>
+        <attribute name="reAlarm" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="sound" optional="YES" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>

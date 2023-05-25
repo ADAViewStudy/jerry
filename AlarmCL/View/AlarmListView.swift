@@ -36,8 +36,9 @@ struct AlarmListView: View {
                         }
                     }
                     HStack {
-                        Text(alarm.label == "" ?  "알람":alarm.label! + (alarm.freq!.isEmpty ? "":","))
-                            .fixedSize(horizontal: true, vertical: false)
+                        Text(alarm.label == "" ? "알람": alarm.label!)
+//                            .fixedSize(horizontal: true, vertical: false)
+                        + Text((alarm.freq!.isEmpty ? "":","))
                         
                         if alarm.freq != "" {
                             Text(alarm.freq!)
@@ -52,7 +53,7 @@ struct AlarmListView: View {
                         isOn = alarm.enable
                     }
                     .onChange(of: isOn) { newValue in
-                        DataController.shared.editAlarm(alarm: alarm, time: alarm.time!, label: alarm.label!, freq: alarm.freq!, sound: alarm.sound!, enable: isOn, context: managedObjContext)
+                        DataController.shared.editAlarm(alarm: alarm, time: alarm.time!, label: alarm.label!, freq: alarm.freq!, sound: alarm.sound!, enable: isOn, reAlarm: alarm.reAlarm, context: managedObjContext)
                     }
                     .onChange(of: alarm.enable) { newValue in
                         isOn = newValue

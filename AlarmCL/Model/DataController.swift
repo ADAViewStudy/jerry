@@ -32,23 +32,25 @@ class DataController: ObservableObject {
         }
     }
     
-    func addAlarm(time: Date, label: String, freq: String, sound: String, enable: Bool, context: NSManagedObjectContext) {
+    func addAlarm(time: Date, label: String, freq: String, sound: String, enable: Bool, reAlarm: Bool, context: NSManagedObjectContext) {
         let alarm = Alarm(context: context)
         alarm.id = UUID()
         alarm.time = time
         alarm.label = label
         alarm.freq = freq
         alarm.sound = sound
+        alarm.reAlarm = reAlarm
         alarm.enable = enable
         
         save(context: context)
     }
     
-    func editAlarm(alarm: Alarm,time: Date, label: String, freq: String, sound: String, enable: Bool, context: NSManagedObjectContext) {
+    func editAlarm(alarm: Alarm,time: Date, label: String, freq: String, sound: String, enable: Bool, reAlarm: Bool, context: NSManagedObjectContext) {
         alarm.time = time
         alarm.label = label
         alarm.freq = freq
         alarm.sound = sound
+        alarm.reAlarm = reAlarm
         alarm.enable = enable
         
         save(context: context)
