@@ -31,7 +31,7 @@ struct AlarmListView: View {
                             .fixedSize(horizontal: true, vertical: false)
                         ZStack {
                             Text(timeFormatter.string(from: alarm.time!))
-                                .font(.system(size: 45))
+                                .font(.system(size: 50))
                                 .fixedSize(horizontal: true, vertical: false)
                         }
                     }
