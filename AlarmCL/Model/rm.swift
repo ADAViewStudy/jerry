@@ -7,7 +7,6 @@
 
 import Foundation
 
-let weekOrder = ["월", "화", "수", "목", "금", "토", "일"]
 
 //struct Alarm : Identifiable, Equatable {
 //    var id = UUID()

@@ -14,9 +14,10 @@ struct DetailAlarmView: View {
     
     @State private var selectedTime = Date()
     @State private var labelText = ""
-    @State var isOn = true
+    @State private var isOn = true
     @State private var firstAppear = true
     @State private var freqency = ""
+    @State private var sound = ""
     
     var alarm: FetchedResults<Alarm>.Element? = nil
     
@@ -48,14 +49,14 @@ struct DetailAlarmView: View {
                     }
                     
                     NavigationLink {
-                        SoundSelectView()
+                        SoundSelectView(sound: $sound)
                             .navigationTitle("사운드")
                     } label: {
                         HStack {
                             Text("사운드")
                                 .foregroundColor(.white)
                             Spacer()
-                            Text("전파 탐지기")
+                            Text(sound)
                         }
                         .foregroundColor(.gray)
                     }
@@ -90,6 +91,7 @@ struct DetailAlarmView: View {
                         labelText = alarm.label!
                         isOn = alarm.enable
                         freqency = alarm.freq!
+                        sound = alarm.sound!
                         firstAppear = false
                     }
                 }
@@ -124,13 +126,13 @@ struct DetailAlarmView: View {
     }
     
     func handleAppendAlarm() {
-        DataController.shared.addAlarm(time: selectedTime, label: labelText, freq: freqency, sound: "sound", enable: isOn, context: managedObjContext)
+        DataController.shared.addAlarm(time: selectedTime, label: labelText, freq: freqency, sound: sound, enable: isOn, context: managedObjContext)
         dismiss()
     }
     
     func handleEditAlarm() {
         guard let alarm = alarm else { return }
-        DataController.shared.editAlarm(alarm: alarm, time: selectedTime, label: labelText, freq: freqency, sound: "sound", enable: isOn, context: managedObjContext)
+        DataController.shared.editAlarm(alarm: alarm, time: selectedTime, label: labelText, freq: freqency, sound: sound, enable: isOn, context: managedObjContext)
         dismiss()
     }
 }

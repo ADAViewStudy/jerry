@@ -14,7 +14,6 @@ struct AlarmView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Alarm.time, ascending: true)]) var alarms: FetchedResults<Alarm>
     
     @State var isShow: Bool = false
-    @State private var editMode: EditMode = .inactive
     
     var body: some View {
         NavigationStack {
