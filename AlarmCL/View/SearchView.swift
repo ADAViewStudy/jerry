@@ -29,11 +29,11 @@ struct SearchView: View {
 
                 }
                 List {
-                    ForEach(array.filter{$0.timeZone.identifier.hasPrefix(searchText) || searchText == ""}, id:\.self) { location in
+                    ForEach(array.filter{$0.timeZone.localizedName(for: .generic, locale: .current)!.hasPrefix(searchText) || searchText == ""}, id:\.self) { location in
                         Button(action: {
                             
                         }, label: {
-                            Text(location.timeZone.identifier)
+                            Text(location.timeZone.localizedName(for: .generic, locale: .current)!)
                         })
                     }
                 } //리스트의 스타일 수정
