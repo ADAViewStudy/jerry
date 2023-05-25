@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct AlarmCLApp: App {
     @StateObject private var dataController = DataController.shared
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()

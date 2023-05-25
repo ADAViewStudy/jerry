@@ -273,11 +273,11 @@
 			};
 			buildConfigurationList = 869C37922A13A8C500C1034B /* Build configuration list for PBXProject "AlarmCL" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				ko,
 			);
 			mainGroup = 869C378E2A13A8C500C1034B;
 			productRefGroup = 869C37982A13A8C500C1034B /* Products */;

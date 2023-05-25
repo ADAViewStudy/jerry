@@ -35,7 +35,6 @@ struct FreqView: View {
         .onDisappear() {
             selectedDays.remove("")
             freq = weekdayToString(arr: selectedDays)
-            print()
         }
         .onAppear() {
             let new = freq
