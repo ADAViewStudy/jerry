@@ -11,6 +11,7 @@ struct WorldTimeListView: View {
     
     var worldtime: FetchedResults<WorldTime>.Element
 //    var worldtime: WorldTimes = .init(timeZone: TimeZone(identifier: "Europe/Berlin")!, city: "Berlin")
+    @Environment(\.editMode) private var editMode
     
     var body: some View {
         VStack(alignment: .leading,spacing: -15) {
@@ -22,13 +23,18 @@ struct WorldTimeListView: View {
                     .font(.system(size: 25))
                     .fixedSize(horizontal: true, vertical: false)
                 Spacer()
-                Text(meridiemFormatter.string(from: worldtime.time!))
-                    .font(.system(size: 25))
-                    .fixedSize(horizontal: true, vertical: false)
-                Text(timeFormatter.string(from: worldtime.time!))
-                    .fixedSize(horizontal: true, vertical: false)
-                    .font(.system(size: 50))
-                    .fontWeight(.light)
+                if editMode?.wrappedValue.isEditing == false {
+                    Text(meridiemFormatter.string(from: worldtime.time!))
+                        .font(.system(size: 30))
+                        .fixedSize(horizontal: true, vertical: false)
+                    Text(timeFormatter.string(from: worldtime.time!))
+                        .fixedSize(horizontal: true, vertical: false)
+                        .font(.system(size: 50))
+                        .fontWeight(.light)
+                } else {
+                    Text(" ")
+                        .font(.system(size: 50))
+                }
             }
         }
     }
