@@ -33,6 +33,7 @@ struct AlarmListView: View {
                             Text(timeFormatter.string(from: alarm.time!))
                                 .font(.system(size: 50))
                                 .fixedSize(horizontal: true, vertical: false)
+                                .fontWeight(.light)
                         }
                     }
                     HStack {
