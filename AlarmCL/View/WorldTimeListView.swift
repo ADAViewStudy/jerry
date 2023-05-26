@@ -14,16 +14,19 @@ struct WorldTimeListView: View {
     
     var body: some View {
         VStack(alignment: .leading,spacing: -15) {
-            Text("오늘, - \(2) 시간")
+            Text("오늘, -\(2) 시간")
                 .font(.system(size: 15))
             
             HStack(alignment: .lastTextBaseline) {
                 Text(worldtime.location!)
-                    .font(.system(size: 30))
+                    .font(.system(size: 25))
+                    .fixedSize(horizontal: true, vertical: false)
                 Spacer()
                 Text(meridiemFormatter.string(from: worldtime.time!))
-                    .font(.system(size: 30))
+                    .font(.system(size: 25))
+                    .fixedSize(horizontal: true, vertical: false)
                 Text(timeFormatter.string(from: worldtime.time!))
+                    .fixedSize(horizontal: true, vertical: false)
                     .font(.system(size: 50))
                     .fontWeight(.light)
             }

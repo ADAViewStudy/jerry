@@ -12,7 +12,6 @@ struct WorldTimeView: View {
     
     @Environment(\.managedObjectContext) var managedObjContext
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \WorldTime.order, ascending: true)]) var worldtimes: FetchedResults<WorldTime>
-
     
     @State private var isShow = false
     

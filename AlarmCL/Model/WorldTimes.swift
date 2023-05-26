@@ -26,7 +26,33 @@ func wTimes() -> [WorldTimes] {
             worldtimes.append(worldTime)
         }
     }
-    return worldtimes
+    return worldtimes.sorted { $0.city < $1.city }
+}
+
+func splitIntoSections(_ sortedItems: [WorldTimes]) -> [[WorldTimes]] {
+    var sections: [[WorldTimes]] = []
+    var currentSection: [WorldTimes] = []
+    var previousFirstLetter = ""
+    
+    for item in sortedItems {
+        let firstLetter = String(item.city.prefix(1))
+        
+        if firstLetter != previousFirstLetter {
+            if !currentSection.isEmpty {
+                sections.append(currentSection)
+            }
+            currentSection = []
+        }
+        
+        currentSection.append(item)
+        previousFirstLetter = firstLetter
+    }
+    
+    if !currentSection.isEmpty {
+        sections.append(currentSection)
+    }
+    
+    return sections
 }
 
 

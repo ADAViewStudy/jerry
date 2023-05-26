@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		86293A122A1B9F8A00A862CD /* AlarmsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86293A102A1B9F8A00A862CD /* AlarmsModel.xcdatamodeld */; };
 		86293A142A1BA82000A862CD /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A132A1BA82000A862CD /* AlarmListView.swift */; };
-		86293A1A2A1F5EEA00A862CD /* AddWorldTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A192A1F5EEA00A862CD /* AddWorldTime.swift */; };
 		86293A1C2A1F600100A862CD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A1B2A1F600100A862CD /* SearchBar.swift */; };
 		86293A202A1FBB2600A862CD /* WorldTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A1F2A1FBB2600A862CD /* WorldTimes.swift */; };
-		86293A222A1FBD3800A862CD /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A212A1FBD3800A862CD /* SearchView.swift */; };
+		86293A222A1FBD3800A862CD /* AddWorldTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A212A1FBD3800A862CD /* AddWorldTime.swift */; };
 		86293A242A20921F00A862CD /* WorldTimeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A232A20921F00A862CD /* WorldTimeListView.swift */; };
 		864A22372A18A0F30076BB16 /* SoundSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A22362A18A0F30076BB16 /* SoundSelectView.swift */; };
 		864A223F2A1A39D10076BB16 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A223E2A1A39D10076BB16 /* DataController.swift */; };
+		8677E47D2A20C553003A704C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8677E47C2A20C553003A704C /* Modifier.swift */; };
 		869C379B2A13A8C500C1034B /* AlarmCLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C379A2A13A8C500C1034B /* AlarmCLApp.swift */; };
 		869C379D2A13A8C500C1034B /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C379C2A13A8C500C1034B /* MainTabView.swift */; };
 		869C379F2A13A8C600C1034B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 869C379E2A13A8C600C1034B /* Assets.xcassets */; };
@@ -52,13 +52,13 @@
 /* Begin PBXFileReference section */
 		86293A112A1B9F8A00A862CD /* AlarmsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AlarmsModel.xcdatamodel; sourceTree = "<group>"; };
 		86293A132A1BA82000A862CD /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
-		86293A192A1F5EEA00A862CD /* AddWorldTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorldTime.swift; sourceTree = "<group>"; };
 		86293A1B2A1F600100A862CD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		86293A1F2A1FBB2600A862CD /* WorldTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimes.swift; sourceTree = "<group>"; };
-		86293A212A1FBD3800A862CD /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		86293A212A1FBD3800A862CD /* AddWorldTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorldTime.swift; sourceTree = "<group>"; };
 		86293A232A20921F00A862CD /* WorldTimeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeListView.swift; sourceTree = "<group>"; };
 		864A22362A18A0F30076BB16 /* SoundSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSelectView.swift; sourceTree = "<group>"; };
 		864A223E2A1A39D10076BB16 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		8677E47C2A20C553003A704C /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		869C37972A13A8C500C1034B /* AlarmCL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmCL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		869C379A2A13A8C500C1034B /* AlarmCLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCLApp.swift; sourceTree = "<group>"; };
 		869C379C2A13A8C500C1034B /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -112,6 +112,14 @@
 			path = NoValueView;
 			sourceTree = "<group>";
 		};
+		8677E47B2A20C544003A704C /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				8677E47C2A20C553003A704C /* Modifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		869C378E2A13A8C500C1034B = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +143,7 @@
 		869C37992A13A8C500C1034B /* AlarmCL */ = {
 			isa = PBXGroup;
 			children = (
+				8677E47B2A20C544003A704C /* Modifier */,
 				869C379A2A13A8C500C1034B /* AlarmCLApp.swift */,
 				869C37D32A173DE700C1034B /* Utills */,
 				869C37CD2A13B76F00C1034B /* Model */,
@@ -182,9 +191,8 @@
 				869C379C2A13A8C500C1034B /* MainTabView.swift */,
 				869C37C42A13A9BF00C1034B /* WorldTimeView.swift */,
 				86293A232A20921F00A862CD /* WorldTimeListView.swift */,
-				86293A192A1F5EEA00A862CD /* AddWorldTime.swift */,
 				86293A1B2A1F600100A862CD /* SearchBar.swift */,
-				86293A212A1FBD3800A862CD /* SearchView.swift */,
+				86293A212A1FBD3800A862CD /* AddWorldTime.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -338,14 +346,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				864A22372A18A0F30076BB16 /* SoundSelectView.swift in Sources */,
-				86293A1A2A1F5EEA00A862CD /* AddWorldTime.swift in Sources */,
 				86293A1C2A1F600100A862CD /* SearchBar.swift in Sources */,
 				869C37C92A13A9D300C1034B /* TimerView.swift in Sources */,
 				86293A242A20921F00A862CD /* WorldTimeListView.swift in Sources */,
 				869C37D52A173E0000C1034B /* TimeFomatter.swift in Sources */,
 				86293A202A1FBB2600A862CD /* WorldTimes.swift in Sources */,
-				86293A222A1FBD3800A862CD /* SearchView.swift in Sources */,
+				86293A222A1FBD3800A862CD /* AddWorldTime.swift in Sources */,
 				86293A122A1B9F8A00A862CD /* AlarmsModel.xcdatamodeld in Sources */,
+				8677E47D2A20C553003A704C /* Modifier.swift in Sources */,
 				869C37D72A18976800C1034B /* FreqView.swift in Sources */,
 				869C379D2A13A8C500C1034B /* MainTabView.swift in Sources */,
 				869C379B2A13A8C500C1034B /* AlarmCLApp.swift in Sources */,
