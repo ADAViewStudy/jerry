@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct AddWorldTime: View {
     
+    @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.dismiss) var dismiss
     
     let array = wTimes()
@@ -26,42 +27,31 @@ struct SearchView: View {
                         Text("취소")
                             .padding(.trailing)
                     }
-
                 }
                 List {
-                    ForEach(array.filter{$0.timeZone.localizedName(for: .generic, locale: .current)!.hasPrefix(searchText) || searchText == ""}, id:\.self) { location in
+                    ForEach(array.filter{$0.city.hasPrefix(searchText) || searchText == ""}, id:\.self) { location in
                         Button(action: {
-                            
+                            handleAddWorldTime(time: location.currentTime, city: location.city)
                         }, label: {
-                            Text(location.timeZone.localizedName(for: .generic, locale: .current)!)
+                            Text(location.city)
                         })
                     }
                 } //리스트의 스타일 수정
-                .listStyle(PlainListStyle())
-                  //화면 터치시 키보드 숨김
-                .onTapGesture {
-                    hideKeyboard()
-                }
+                .listStyle(.plain)
             }
             .navigationBarTitle("도시 선택")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
-}
-
-
-//화면 터치시 키보드 숨김
-#if canImport(UIKit)
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    func handleAddWorldTime(time: Date, city: String) {
+        DataController.shared.addWorldTime(time: time, location: city, context: managedObjContext)
+        dismiss()
     }
 }
-#endif
 
-
-struct SearchView_Previews: PreviewProvider {
+struct AddWorldTime_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        AddWorldTime()
     }
 }
+

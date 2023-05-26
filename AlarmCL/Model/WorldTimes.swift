@@ -9,12 +9,9 @@ import Foundation
 
 struct WorldTimes: Hashable {
     let timeZone: TimeZone
+    let city: String
     var currentTime: Date {
         return Date().addingTimeInterval(TimeInterval(timeZone.secondsFromGMT()))
-    }
-    
-    init(timeZone: TimeZone) {
-        self.timeZone = timeZone
     }
 }
 
@@ -25,7 +22,7 @@ func wTimes() -> [WorldTimes] {
     // Create an array of WorldTime objects with time zones
     for identifier in allTimeZones {
         if let timeZone = TimeZone(identifier: identifier) {
-            let worldTime = WorldTimes(timeZone: timeZone)
+            let worldTime = WorldTimes(timeZone: timeZone, city: String(timeZone.identifier.split(separator: "/").last!))
             worldtimes.append(worldTime)
         }
     }

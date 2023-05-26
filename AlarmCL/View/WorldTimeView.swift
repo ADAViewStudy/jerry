@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct WorldTimeView: View {
     
     @Environment(\.managedObjectContext) var managedObjContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \WorldTime.time, ascending: true)]) var worldtimes: FetchedResults<WorldTime>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \WorldTime.order, ascending: true)]) var worldtimes: FetchedResults<WorldTime>
+
     
     @State private var isShow = false
     
@@ -18,10 +20,14 @@ struct WorldTimeView: View {
         NavigationStack {
             List {
                 ForEach(worldtimes) { time in
-                    Text(time.location ?? "메롱")
+                    WorldTimeListView(worldtime: time)
                 }
-//                .onDelete(perform: <#T##Optional<(IndexSet) -> Void>##Optional<(IndexSet) -> Void>##(IndexSet) -> Void#>)
-//                .onMove(perform: <#T##Optional<(IndexSet, Int) -> Void>##Optional<(IndexSet, Int) -> Void>##(IndexSet, Int) -> Void#>)
+                .onDelete { index in
+                    DataController.shared.deleteWorldTimeIndex(worldTime: worldtimes, offsets: index, context: managedObjContext)
+                }
+                .onMove { index, num in
+                    DataController.shared.moveWorldTime(worldTime: worldtimes, from: index, to: num, context: managedObjContext)
+                }
             }
             .navigationTitle("세계 시계")
             .toolbar() {
@@ -44,6 +50,7 @@ struct WorldTimeView: View {
                 .environment(\.colorScheme, .dark)
                 .accentColor(Color.orange)
         }
+        
     }
 }
 
