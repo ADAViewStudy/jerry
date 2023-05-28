@@ -13,19 +13,8 @@ struct AddWorldTime: View {
     @Environment(\.dismiss) var dismiss
     
     @State var sortedItems: [[WorldTimes]] = []
-    
     @State private var searchText = ""
-    var filteredItems: [[WorldTimes]] {
-        if searchText.isEmpty {
-            return sortedItems
-        } else {
-            return sortedItems.map { section in
-                section.filter { item in
-                    item.city.localizedCaseInsensitiveContains(searchText)
-                }
-            }.filter { !$0.isEmpty }
-        }
-    }
+    @State var filteredItems: [[WorldTimes]] = []
     
     var body: some View {
         VStack {
@@ -43,27 +32,25 @@ struct AddWorldTime: View {
                     }
                 }
             }
-            List {
-                ForEach(filteredItems, id: \.self) { section in
-                    Section(header: Text(section.first!.city.prefix(1))) {
-                        ForEach(section, id:\.self) { item in
-                            Button {
-                                DataController.shared.addWorldTime(time: item.currentTime, location: item.city, context: managedObjContext)
-                                dismiss()
-                            } label: {
-                                Text(item.city)
-                            }
-                        }
-                    }
-                }
+            if !filteredItems.isEmpty {
+                WorldTimeTableView(worldtimes: filteredItems, didSelectRow: {item in
+                    handleAddWorldTime(time: item.currentTime, city: item.city)
+                })
+                    .id(UUID())
+            } else {
+                WorldTimeTableView(worldtimes: sortedItems, didSelectRow: {item in
+                    handleAddWorldTime(time: item.currentTime, city: item.city)
+                })
+                    .id(UUID())
             }
-            .modifier(VerticalIndex(indexableList: alphabet))
-            .listStyle(.plain)
             
         }
         .onAppear() {
             sortedItems = splitIntoSections(wTimes())
         }
+        .onChange(of: searchText, perform: { newValue in
+            filterItems()
+        })
         .background()
         
     }
@@ -72,6 +59,19 @@ struct AddWorldTime: View {
         DataController.shared.addWorldTime(time: time, location: city, context: managedObjContext)
         dismiss()
     }
+    
+    func filterItems() {
+        if searchText.isEmpty {
+            filteredItems = sortedItems
+        } else {
+            filteredItems = sortedItems.map { section in
+                section.filter { item in
+                    item.city.localizedCaseInsensitiveContains(searchText)
+                }
+            }.filter { !$0.isEmpty }
+        }
+    }
+    
 }
 
 struct AddWorldTime_Previews: PreviewProvider {
@@ -81,4 +81,5 @@ struct AddWorldTime_Previews: PreviewProvider {
             .accentColor(Color.orange)
     }
 }
+
 

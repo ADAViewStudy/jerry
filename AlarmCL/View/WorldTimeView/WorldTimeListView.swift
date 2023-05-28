@@ -19,15 +19,15 @@ struct WorldTimeListView: View {
                 .font(.system(size: 15))
             
             HStack(alignment: .lastTextBaseline) {
-                Text(worldtime.location!)
+                Text((worldtime.location ?? "error"))
                     .font(.system(size: 25))
                     .fixedSize(horizontal: true, vertical: false)
                 Spacer()
                 if editMode?.wrappedValue.isEditing == false {
-                    Text(meridiemFormatter.string(from: worldtime.time!))
+                    Text(meridiemFormatter.string(from: worldtime.time ?? Date()))
                         .font(.system(size: 30))
                         .fixedSize(horizontal: true, vertical: false)
-                    Text(timeFormatter.string(from: worldtime.time!))
+                    Text(timeFormatter.string(from: worldtime.time ?? Date()))
                         .fixedSize(horizontal: true, vertical: false)
                         .font(.system(size: 50))
                         .fontWeight(.light)
