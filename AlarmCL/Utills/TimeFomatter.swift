@@ -13,6 +13,7 @@ var timeFormatter : DateFormatter {
     let formatter = DateFormatter()
     formatter.dateStyle = .none
     formatter.dateFormat = "hh:mm"
+//    formatter.timeZone = TimeZone(secondsFromGMT: 0)
     return formatter
 }
 var meridiemFormatter: DateFormatter {
@@ -23,18 +24,17 @@ var meridiemFormatter: DateFormatter {
     return formatter
 }
 
-func stringToArray(string: String) -> [String] {
-    return string.components(separatedBy: " ")
-}
-
-func arrayToString(array: [String]) -> String {
-    return array.joined(separator: " ")
-}
-
-func sortWeek(cycle: [String]) -> [String] {
-    let arr = cycle.sorted {
-        guard let first = weekOrder.firstIndex(of: $0), let second = weekOrder.firstIndex(of: $1) else { return false }
-        return first < second
+func worldtimeFormatter(for timeZoneIdentifier: String, currentTime: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "aa"
+        formatter.timeZone = TimeZone(identifier: timeZoneIdentifier)
+    return formatter.string(from: currentTime)
     }
-    return arr
-}
+
+func worldmeridiemFormatter(for timeZoneIdentifier: String, currentTime: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm"
+        formatter.timeZone = TimeZone(identifier: timeZoneIdentifier)
+    return formatter.string(from: currentTime)
+    }
+

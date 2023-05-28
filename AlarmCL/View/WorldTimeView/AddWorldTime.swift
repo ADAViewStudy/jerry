@@ -34,12 +34,12 @@ struct AddWorldTime: View {
             }
             if !filteredItems.isEmpty {
                 WorldTimeTableView(worldtimes: filteredItems, didSelectRow: {item in
-                    handleAddWorldTime(time: item.currentTime, city: item.city)
+                    handleAddWorldTime(diff: item.diffTime,city: item.city, identifier: item.identifier)
                 })
                     .id(UUID())
             } else {
                 WorldTimeTableView(worldtimes: sortedItems, didSelectRow: {item in
-                    handleAddWorldTime(time: item.currentTime, city: item.city)
+                    handleAddWorldTime(diff: item.diffTime, city: item.city, identifier: item.identifier)
                 })
                     .id(UUID())
             }
@@ -55,8 +55,8 @@ struct AddWorldTime: View {
         
     }
     
-    func handleAddWorldTime(time: Date, city: String) {
-        DataController.shared.addWorldTime(time: time, location: city, context: managedObjContext)
+    func handleAddWorldTime(diff: String,city: String, identifier: String) {
+        DataController.shared.addWorldTime(diff: diff,location: city, identifier: identifier, context: managedObjContext)
         dismiss()
     }
     

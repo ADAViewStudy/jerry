@@ -13,6 +13,7 @@
 		86293A202A1FBB2600A862CD /* WorldTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A1F2A1FBB2600A862CD /* WorldTimes.swift */; };
 		86293A222A1FBD3800A862CD /* AddWorldTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A212A1FBD3800A862CD /* AddWorldTime.swift */; };
 		86293A242A20921F00A862CD /* WorldTimeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86293A232A20921F00A862CD /* WorldTimeListView.swift */; };
+		8629E5C42A23A3D800F3E8D2 /* Utills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629E5C32A23A3D800F3E8D2 /* Utills.swift */; };
 		864A22372A18A0F30076BB16 /* SoundSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A22362A18A0F30076BB16 /* SoundSelectView.swift */; };
 		864A223F2A1A39D10076BB16 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864A223E2A1A39D10076BB16 /* DataController.swift */; };
 		8650D9D52A23587800A962EC /* WorldTimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8650D9D42A23587800A962EC /* WorldTimeTableView.swift */; };
@@ -57,6 +58,7 @@
 		86293A1F2A1FBB2600A862CD /* WorldTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimes.swift; sourceTree = "<group>"; };
 		86293A212A1FBD3800A862CD /* AddWorldTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorldTime.swift; sourceTree = "<group>"; };
 		86293A232A20921F00A862CD /* WorldTimeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeListView.swift; sourceTree = "<group>"; };
+		8629E5C32A23A3D800F3E8D2 /* Utills.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utills.swift; sourceTree = "<group>"; };
 		864A22362A18A0F30076BB16 /* SoundSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSelectView.swift; sourceTree = "<group>"; };
 		864A223E2A1A39D10076BB16 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		8650D9D42A23587800A962EC /* WorldTimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeTableView.swift; sourceTree = "<group>"; };
@@ -169,8 +171,8 @@
 		869C37992A13A8C500C1034B /* AlarmCL */ = {
 			isa = PBXGroup;
 			children = (
-				8677E47B2A20C544003A704C /* Modifier */,
 				869C379A2A13A8C500C1034B /* AlarmCLApp.swift */,
+				8677E47B2A20C544003A704C /* Modifier */,
 				869C37D32A173DE700C1034B /* Utills */,
 				869C37CD2A13B76F00C1034B /* Model */,
 				869C37CC2A13ACAF00C1034B /* View */,
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				869C37D42A173E0000C1034B /* TimeFomatter.swift */,
+				8629E5C32A23A3D800F3E8D2 /* Utills.swift */,
 			);
 			path = Utills;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				869C37D72A18976800C1034B /* FreqView.swift in Sources */,
 				869C379D2A13A8C500C1034B /* MainTabView.swift in Sources */,
 				869C379B2A13A8C500C1034B /* AlarmCLApp.swift in Sources */,
+				8629E5C42A23A3D800F3E8D2 /* Utills.swift in Sources */,
 				869C37C72A13A9CB00C1034B /* StopWatchView.swift in Sources */,
 				869C37CB2A13A9EF00C1034B /* AlarmView.swift in Sources */,
 				869C37D12A13C4FA00C1034B /* DetailAlarmView.swift in Sources */,

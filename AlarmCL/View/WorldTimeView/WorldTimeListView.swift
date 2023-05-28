@@ -10,12 +10,17 @@ import SwiftUI
 struct WorldTimeListView: View {
     
     var worldtime: FetchedResults<WorldTime>.Element
-//    var worldtime: WorldTimes = .init(timeZone: TimeZone(identifier: "Europe/Berlin")!, city: "Berlin")
     @Environment(\.editMode) private var editMode
+    
+    @State private var currentTime = Date()
+    @State private var selectedTimeZoneIdentifier = ""
+    @State private var currentDay = ""
+    
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack(alignment: .leading,spacing: -15) {
-            Text("오늘, -\(2) 시간")
+            Text("\(currentDay), \(worldtime.diffTime ?? "error") 시간")
                 .font(.system(size: 15))
             
             HStack(alignment: .lastTextBaseline) {
@@ -24,27 +29,29 @@ struct WorldTimeListView: View {
                     .fixedSize(horizontal: true, vertical: false)
                 Spacer()
                 if editMode?.wrappedValue.isEditing == false {
-                    Text(meridiemFormatter.string(from: worldtime.time ?? Date()))
-                        .font(.system(size: 30))
-                        .fixedSize(horizontal: true, vertical: false)
-                    Text(timeFormatter.string(from: worldtime.time ?? Date()))
-                        .fixedSize(horizontal: true, vertical: false)
-                        .font(.system(size: 50))
-                        .fontWeight(.light)
+                    if let identifier = worldtime.identifier {
+                        Text(worldtimeFormatter(for: identifier, currentTime: currentTime))
+                            .font(.system(size: 30))
+                            .fixedSize(horizontal: true, vertical: false)
+                        Text(worldmeridiemFormatter(for: identifier, currentTime: currentTime))
+                            .fixedSize(horizontal: true, vertical: false)
+                            .font(.system(size: 50))
+                            .fontWeight(.light)
+                    }
                 } else {
                     Text(" ")
                         .font(.system(size: 50))
                 }
+                
+            }.onReceive(timer) { _ in
+                currentTime = Date()
+            }
+            .onAppear() {
+                guard let identifier = worldtime.identifier else { return }
+                currentDay = compareDates(currentDate: currentTime, identifier: identifier)
             }
         }
     }
     
 }
 
-//struct WorldTimeListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorldTimeListView()
-//            .environment(\.colorScheme, .dark)
-//            .accentColor(Color.orange)
-//    }
-//}

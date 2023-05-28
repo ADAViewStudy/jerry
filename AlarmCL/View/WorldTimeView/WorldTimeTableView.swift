@@ -42,8 +42,6 @@ struct WorldTimeTableView: UIViewRepresentable {
         }
         
         func numberOfSections(in tableView: UITableView) -> Int {
-//            print("DEBUG == numberof Section===\(worldtimes.count)")
-//            print("\(worldtimes.first)")
             return worldtimes.count
         }
         

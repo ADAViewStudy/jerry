@@ -12,7 +12,6 @@ import SwiftUI
 class DataController: ObservableObject {
     static let shared = DataController()
     
-    
     let container = NSPersistentContainer(name: "AlarmsModel")
     
     init() {
@@ -69,18 +68,12 @@ class DataController: ObservableObject {
         }
     }
     
-    func addWorldTime(time: Date, location: String, context: NSManagedObjectContext) {
+    func addWorldTime(diff: String ,location: String,identifier: String, context: NSManagedObjectContext) {
         let world = WorldTime(context: context)
         world.id = UUID()
-        world.time = time
+        world.diffTime = diff
         world.location = location
-        
-        save(context: context)
-    }
-    
-    func editWorldTime(worldTime: WorldTime, time: Date, location: String, context: NSManagedObjectContext) {
-        worldTime.time = time
-        worldTime.location = location
+        world.identifier = identifier
         
         save(context: context)
     }
