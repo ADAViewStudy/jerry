@@ -61,38 +61,26 @@ func timeDifference(currentTimeZone: TimeZone, selectedTimeZone: TimeZone) -> St
 func compareDates(currentDate: Date, identifier: String) -> String {
     guard let timezone = TimeZone(identifier: identifier) else {return "error"}
     
-//    let secondsFromGMT = timezone!.secondsFromGMT(for: currentDate)
-//    let localizedDate = currentDate.addingTimeInterval(TimeInterval(secondsFromGMT))
+    let dateformat = DateFormatter()
+    dateformat.dateFormat = "yyyy-MM-dd"
+    dateformat.timeZone = .current
     
+    let dateformat2 = DateFormatter()
+    dateformat2.dateFormat = "yyyy-MM-dd"
+    dateformat2.timeZone = timezone
     
-    let localizedDate = currentDate.inTimeZone(timezone)
+    let sdate = dateformat.string(from: currentDate)
+    let edate = dateformat2.string(from: currentDate)
     
-    
-    print(localizedDate)
-    let cal = Calendar.current.compare(currentDate, to: localizedDate,toGranularity: .day)
-    
-    switch cal {
-    case .orderedSame:
-        return "오늘"
-    case .orderedDescending:
-        return "어제"
-    case .orderedAscending:
-        return "내일"
-    }
-    
-//    
-//    if Calendar.current.isDateInToday(localizedDate) {
-//        print("today")
-//        return "오늘"
-//    } else if Calendar.current.isDateInYesterday(localizedDate) {
-//        print("yesterday")
-//        return "어제"
-//    } else if Calendar.current.isDateInTomorrow(localizedDate) {
-//        print("tomorrow")
-//        return "내일"
-//    }
-    return "err"
+    let comparisonResult = sdate.compare(edate, options: .numeric)
 
+    if comparisonResult == .orderedAscending {
+        return "내일"
+    } else if comparisonResult == .orderedDescending {
+        return "어제"
+    } else {
+        return "오늘"
+    }
 }
 
 
