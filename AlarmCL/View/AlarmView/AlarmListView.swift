@@ -38,12 +38,15 @@ struct AlarmListView: View {
                         }
                     }
                     HStack {
-                        Text(alarm.label == "" ? "알람": alarm.label!)
-//                            .fixedSize(horizontal: true, vertical: false)
-                        + Text((alarm.freq!.isEmpty ? "":","))
+                        if let label = alarm.label {
+                            Text(alarm.label == "" ? "알람": label)
+    //                            .fixedSize(horizontal: true, vertical: false)
+                            + Text((alarm.freq!.isEmpty ? "":","))
+                        }
+
                         
-                        if alarm.freq != "" {
-                            Text(alarm.freq!)
+                        if let freq = alarm.freq {
+                            Text(freq)
                         }
                         Spacer()
                     }
