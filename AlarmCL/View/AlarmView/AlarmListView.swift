@@ -27,11 +27,11 @@ struct AlarmListView: View {
             HStack {
                 VStack(alignment: .leading) {
                     HStack(alignment: .firstTextBaseline) {
-                        Text(meridiemFormatter.string(from: alarm.time!))
+                        Text(meridiemFormatter.string(from: alarm.time ?? Date()))
                             .font(.system(size: 33))
                             .fixedSize(horizontal: true, vertical: false)
                         ZStack {
-                            Text(timeFormatter.string(from: alarm.time!))
+                            Text(timeFormatter.string(from: alarm.time ?? Date()))
                                 .font(.system(size: 50))
                                 .fixedSize(horizontal: true, vertical: false)
                                 .fontWeight(.light)

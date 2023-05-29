@@ -20,3 +20,5 @@ struct WorldTimes: Hashable {
         self.diffTime = timeDifference(currentTimeZone: TimeZone.current, selectedTimeZone: self.timeZone)
     }
 }
+
+

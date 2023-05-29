@@ -101,10 +101,3 @@ func sortWeek(cycle: [String]) -> [String] {
 }
 
 
-
-extension Date {
-    func inTimeZone(_ timezone: TimeZone) -> Date {
-        let secondsFromGMT = timezone.secondsFromGMT(for: self)
-        return addingTimeInterval(TimeInterval(secondsFromGMT))
-    }
-}
