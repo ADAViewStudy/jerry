@@ -18,8 +18,6 @@ struct AlarmListView: View {
     @State var isShow = false
     @State var isOn = false
     
-//    var onDel: ((Alarm) -> Void)? = nil
-    
     var body: some View {
         Button {
             isShow = true
@@ -40,7 +38,6 @@ struct AlarmListView: View {
                     HStack {
                         if let label = alarm.label {
                             Text(alarm.label == "" ? "알람": label)
-    //                            .fixedSize(horizontal: true, vertical: false)
                             + Text((alarm.freq!.isEmpty ? "":","))
                         }
 

@@ -78,7 +78,7 @@
 		869C37B52A13A8C700C1034B /* AlarmCLUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCLUITests.swift; sourceTree = "<group>"; };
 		869C37B72A13A8C700C1034B /* AlarmCLUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCLUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		869C37C42A13A9BF00C1034B /* WorldTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTimeView.swift; sourceTree = "<group>"; };
-		869C37C62A13A9CB00C1034B /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; };
+		869C37C62A13A9CB00C1034B /* StopWatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		869C37C82A13A9D300C1034B /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		869C37CA2A13A9EF00C1034B /* AlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmView.swift; sourceTree = "<group>"; };
 		869C37D02A13C4FA00C1034B /* DetailAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAlarmView.swift; sourceTree = "<group>"; };
@@ -111,15 +111,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		864A22382A1A29580076BB16 /* NoValueView */ = {
-			isa = PBXGroup;
-			children = (
-				869C37C82A13A9D300C1034B /* TimerView.swift */,
-				869C37C62A13A9CB00C1034B /* StopWatchView.swift */,
-			);
-			path = NoValueView;
-			sourceTree = "<group>";
-		};
 		8650D9D22A23319200A962EC /* AlarmView */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +171,8 @@
 				869C37D32A173DE700C1034B /* Utills */,
 				869C37CD2A13B76F00C1034B /* Model */,
 				869C37CC2A13ACAF00C1034B /* View */,
+				869C37C82A13A9D300C1034B /* TimerView.swift */,
+				869C37C62A13A9CB00C1034B /* StopWatchView.swift */,
 				869C379E2A13A8C600C1034B /* Assets.xcassets */,
 				869C37A02A13A8C600C1034B /* Preview Content */,
 			);
@@ -215,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				869C379C2A13A8C500C1034B /* MainTabView.swift */,
-				864A22382A1A29580076BB16 /* NoValueView */,
 				8650D9D22A23319200A962EC /* AlarmView */,
 				8650D9D32A2331B200A962EC /* WorldTimeView */,
 			);

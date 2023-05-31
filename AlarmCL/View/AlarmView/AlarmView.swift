@@ -47,9 +47,6 @@ struct AlarmView: View {
                     }
                 }
             }
-            //            .onChange(of: alarmArr, perform: { newValue in
-            //                alarmArr.sort { $0.mainTime < $1.mainTime }
-            //            })
             .listStyle(.plain)
             .navigationTitle("알람")
             .navigationBarTitleDisplayMode(.automatic)
