@@ -101,3 +101,13 @@ func sortWeek(cycle: [String]) -> [String] {
 }
 
 
+func stringFromTimeInterval(_ interval: TimeInterval) -> String {
+    let intervalInt = Int(interval)
+    let millisecondsInt = Int((interval - Double(intervalInt)) * 100)
+    
+    let minutes = intervalInt / 60
+    let seconds = intervalInt % 60
+    let milliseconds = millisecondsInt
+    
+    return String(format: "%02d:%02d.%02d", minutes, seconds, milliseconds)
+}

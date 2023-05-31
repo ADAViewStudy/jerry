@@ -15,16 +15,16 @@ struct StopWatchView: View {
     var body: some View {
         VStack {
             TabView(selection: $selectionIndex) {
-                Text("\(viewModel.secondsElapsed)")
+                Text("\(stringFromTimeInterval(_:viewModel.secondsElapsed))")
+                    .fontWeight(.light)
                     .fixedSize(horizontal: true, vertical: false)
                     .font(.system(size: 90))
-                    .fontWeight(.light)
                     .tag(0)
                 Clock(time: viewModel.secondsElapsed,lapTime: viewModel.timeStops)
                     .frame(width: 300,height: 300)
                     .tag(1)
             }.tabViewStyle(.page)
-                .frame(width: .infinity,height: 380)
+                .frame(width: 500,height: 380)
             VStack {
                 HStack {
                     Button(!isRunning&&(!(viewModel.secondsElapsed==0)) ? "재설정":"랩") {
@@ -44,14 +44,14 @@ struct StopWatchView: View {
                         HStack {
                             Text("랩\(viewModel.stopArr.count+1)")
                             Spacer()
-                            Text("\(viewModel.timeStops)")
+                            Text("\(stringFromTimeInterval(_:viewModel.timeStops))")
                         }
                     }
                     ForEach(viewModel.stopArr.indices.reversed() ,id: \.self) { index in
                         HStack {
                             Text("랩\(index+1)")
                             Spacer()
-                            Text("\(viewModel.stopArr[Int(index)])")
+                            Text("\(stringFromTimeInterval(_:viewModel.stopArr[Int(index)]))")
                         }
                     }
                 }.listStyle(.plain)
