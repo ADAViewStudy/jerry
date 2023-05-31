@@ -15,13 +15,16 @@ struct StopWatchView: View {
     var body: some View {
         VStack {
             TabView(selection: $selectionIndex) {
-                Text("@@")
+                Text("\(viewModel.secondsElapsed)")
+                    .fixedSize(horizontal: true, vertical: false)
+                    .font(.system(size: 90))
+                    .fontWeight(.light)
                     .tag(0)
                 Clock(time: viewModel.secondsElapsed,lapTime: viewModel.timeStops)
                     .frame(width: 300,height: 300)
                     .tag(1)
             }.tabViewStyle(.page)
-                .frame(width: 300,height: 380)
+                .frame(width: .infinity,height: 380)
             VStack {
                 HStack {
                     Button(!isRunning&&(!(viewModel.secondsElapsed==0)) ? "재설정":"랩") {

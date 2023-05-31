@@ -24,6 +24,8 @@ struct Clock: View {
                 .stroke(Color.orange, lineWidth: 2)
                 .rotationEffect(Angle.degrees(Double(time) * 360/60))
             Color.clear
+            Text("\(time)")
+                .offset(y: 60)
         }
     }
     
