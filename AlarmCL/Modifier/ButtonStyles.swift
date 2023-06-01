@@ -14,9 +14,9 @@ struct CircleStyle: ButtonStyle {
             .fill()
             .overlay(
                 Circle()
-                    .stroke(lineWidth: 2)
+                    .stroke(Color.black,lineWidth: 2)
                     .foregroundColor(.white)
-                    .padding(4)
+                    .padding(3)
             )
             .overlay(
                 configuration.label

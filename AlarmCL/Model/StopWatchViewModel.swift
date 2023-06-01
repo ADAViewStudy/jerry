@@ -36,7 +36,6 @@ class StopwatchViewModel: ObservableObject {
     }
     
     func reset(managedObjContext: NSManagedObjectContext) {
-        print("reset")
         timer?.cancel()
         timer = nil
         secondsElapsed = 0

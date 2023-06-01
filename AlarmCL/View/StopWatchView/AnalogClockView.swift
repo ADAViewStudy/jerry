@@ -12,20 +12,35 @@ struct Clock: View {
     var lapTime: TimeInterval?
     var body: some View {
         ZStack {
-            ForEach(0..<60*4) { tick in
-                self.tick(at: tick)
+            if lapTime != nil {
+                ForEach(0..<60*4) { tick in
+                    self.tick(at: tick)
+                }
+            } else {
+                ForEach(0..<60) { tick in
+                    self.miniIick(at: tick)
+                }
             }
             if lapTime != nil {
                 Pointer()
                     .stroke(Color.blue, lineWidth: 2)
                     .rotationEffect(Angle.degrees(Double(lapTime!) * 360/60))
+                Pointer()
+                    .stroke(Color.orange, lineWidth: 2)
+                    .rotationEffect(Angle.degrees(Double(time) * 360/60))
+            } else {
+                Pointer()
+                    .fill(.orange)
+                    .rotationEffect(Angle.degrees(Double(time) * 360/60))
+                Pointer()
+                    .stroke(Color.orange, lineWidth: 2)
+                    .rotationEffect(Angle.degrees(Double(time) * 360/60))
             }
-            Pointer()
-                .stroke(Color.orange, lineWidth: 2)
-                .rotationEffect(Angle.degrees(Double(time) * 360/60))
             Color.clear
-            Text("\(stringFromTimeInterval(_:time))")
-                .offset(y: 60)
+            if lapTime != nil {
+                Text("\(stringFromTimeInterval(_:time))")
+                    .offset(y: 60)
+            }
         }
     }
     
@@ -47,6 +62,27 @@ struct Clock: View {
             Spacer()
         }
         .rotationEffect(Angle.degrees(Double(tick)/240 * 360))
+    }
+    func miniIick(at tick: Int) -> some View {
+        let degree: Double = Double(-tick/10)*60
+        return VStack {
+            Rectangle()
+                .fill(Color.primary)
+                .opacity(tick % 10 == 0 ? 1 : 0.4)
+                .frame(width: 1, height: tick % 2 == 0 ? 10 : 5)
+            if tick % 10 == 0 {
+                if tick == 0 {
+                    Text("30")
+                        .font(.system(size: 7))
+                } else {
+                    Text("\(tick/2)")
+                        .rotationEffect(.degrees(degree))
+                        .font(.system(size: 7))
+                }
+            }
+            Spacer()
+        }
+        .rotationEffect(Angle.degrees(Double(tick)/60 * 360))
     }
 }
 
