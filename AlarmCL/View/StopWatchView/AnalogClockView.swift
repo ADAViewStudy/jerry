@@ -30,7 +30,8 @@ struct Clock: View {
     }
     
     func tick(at tick: Int) -> some View {
-        VStack {
+        let degree: Double = Double(-tick/20)*30
+        return VStack {
             Rectangle()
                 .fill(Color.primary)
                 .opacity(tick % 20 == 0 ? 1 : 0.4)
@@ -40,6 +41,7 @@ struct Clock: View {
                     Text("60")
                 } else {
                     Text("\(tick/4)")
+                        .rotationEffect(.degrees(degree))
                 }
             }
             Spacer()

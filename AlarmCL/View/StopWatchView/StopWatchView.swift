@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct StopWatchView: View {
+    
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(entity: StopWatch.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \StopWatch.id, ascending: false)]) var stopwatch: FetchedResults<StopWatch>
+    
     @StateObject private var viewModel = StopwatchViewModel()
     @State private var isRunning = false
     @State private var selectionIndex = 0
@@ -28,13 +33,13 @@ struct StopWatchView: View {
             VStack {
                 HStack {
                     Button(!isRunning&&(!(viewModel.secondsElapsed==0)) ? "재설정":"랩") {
-                        isRunning ? viewModel.save(): viewModel.reset()
+                        isRunning ? viewModel.save(managedObjContext: managedObjContext): viewModel.reset(managedObjContext: managedObjContext)
                     }.foregroundColor(!isRunning&&(viewModel.secondsElapsed==0) ? Color(UIColor.lightGray):Color(UIColor.darkGray))
                         .disabled(!isRunning&&(viewModel.secondsElapsed==0) ? true : false)
                     Spacer()
                     Button(isRunning ? "중단" : "시작") {
                         isRunning.toggle()
-                        isRunning ? viewModel.start() : viewModel.stop()
+                        isRunning ? viewModel.start(managedObjContext: managedObjContext) : viewModel.stop()
                     }.foregroundColor(isRunning ? .red: .green)
                 }.buttonStyle(CircleStyle())
                     .padding([.leading,.trailing])
