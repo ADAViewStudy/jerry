@@ -21,7 +21,7 @@ struct StopWatchView: View {
         VStack {
             TabView(selection: $selectionIndex) {
                 Text("\(stringFromTimeInterval(_:viewModel.secondsElapsed))")
-                    .fontWeight(.light)
+                    .fontWeight(.thin)
                     .fixedSize(horizontal: true, vertical: false)
                     .font(.system(size: 90))
                     .tag(0)
@@ -39,8 +39,8 @@ struct StopWatchView: View {
                     Button(!isRunning&&(!(viewModel.secondsElapsed==0)) ? "재설정":"랩") {
                         isRunning ? viewModel.save(managedObjContext: managedObjContext): viewModel.reset(managedObjContext: managedObjContext)
                     }.foregroundColor(.gray)
-                        .disabled(!isRunning&&(viewModel.secondsElapsed==0) ? true : false)
-                        .opacity(!isRunning&&(viewModel.secondsElapsed==0) ? 0.4:0.6)
+//                        .disabled(!isRunning&&(viewModel.secondsElapsed==0) ? true : false)
+                        .opacity(!isRunning&&(viewModel.secondsElapsed==0) ? 0.3:0.6)
                     Spacer()
                     Button(isRunning ? "중단" : "시작") {
                         isRunning.toggle()
