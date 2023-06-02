@@ -63,9 +63,10 @@ struct StopWatchView: View {
                             Text("랩\(index+1)")
                             Spacer()
                             Text("\(stringFromTimeInterval(_:viewModel.stopArr[Int(index)]))")
-                        }
+                        }.foregroundColor((2 <= viewModel.stopArr.count)&&viewModel.stopArr.min() == viewModel.stopArr[index] ? .green : (viewModel.stopArr.max() == viewModel.stopArr[index] ? .red: .white))
                     }
-                }.listStyle(.plain)
+                }
+                .listStyle(.plain)
             }.offset(y:-80)
         }
     }

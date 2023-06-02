@@ -54,9 +54,9 @@ struct AlarmListView: View {
                 .onChange(of: isOn) { newValue in
                     DataController.shared.editAlarm(alarm: alarm, time: alarm.time!, label: alarm.label!, freq: alarm.freq!, sound: alarm.sound!, enable: isOn, reAlarm: alarm.reAlarm, context: managedObjContext)
                 }
-                .onChange(of: alarm.enable) { newValue in
-                    isOn = newValue
-                }
+//                .onChange(of: alarm.enable) { newValue in
+//                    isOn = newValue
+//                }
                 .foregroundColor(isOn ? .white : .gray)
                 if editMode?.wrappedValue.isEditing == false {
                     Toggle(isOn: $isOn) {}
