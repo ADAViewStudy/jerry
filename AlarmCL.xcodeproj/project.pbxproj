@@ -37,6 +37,7 @@
 		869C37D12A13C4FA00C1034B /* DetailAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D02A13C4FA00C1034B /* DetailAlarmView.swift */; };
 		869C37D52A173E0000C1034B /* TimeFomatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D42A173E0000C1034B /* TimeFomatter.swift */; };
 		869C37D72A18976800C1034B /* FreqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D62A18976800C1034B /* FreqView.swift */; };
+		86FBF22A2A2B476D00F60645 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBF2292A2B476D00F60645 /* CustomPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		869C37D02A13C4FA00C1034B /* DetailAlarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAlarmView.swift; sourceTree = "<group>"; };
 		869C37D42A173E0000C1034B /* TimeFomatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFomatter.swift; sourceTree = "<group>"; };
 		869C37D62A18976800C1034B /* FreqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreqView.swift; sourceTree = "<group>"; };
+		86FBF2292A2B476D00F60645 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +189,6 @@
 				869C37D32A173DE700C1034B /* Utils */,
 				869C37CD2A13B76F00C1034B /* Model */,
 				869C37CC2A13ACAF00C1034B /* View */,
-				869C37C82A13A9D300C1034B /* TimerView.swift */,
 				869C379E2A13A8C600C1034B /* Assets.xcassets */,
 				869C37A02A13A8C600C1034B /* Preview Content */,
 			);
@@ -226,6 +227,8 @@
 				8650D9D22A23319200A962EC /* AlarmView */,
 				8650D9D32A2331B200A962EC /* WorldTimeView */,
 				8629E5CB2A2796F700F3E8D2 /* StopWatchView */,
+				86FBF2292A2B476D00F60645 /* CustomPicker.swift */,
+				869C37C82A13A9D300C1034B /* TimerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				8629E5CD2A27973E00F3E8D2 /* AnalogClockView.swift in Sources */,
 				86293A122A1B9F8A00A862CD /* AlarmsModel.xcdatamodeld in Sources */,
 				8677E47D2A20C553003A704C /* Modifier.swift in Sources */,
+				86FBF22A2A2B476D00F60645 /* CustomPicker.swift in Sources */,
 				8629E5C62A249DC000F3E8D2 /* Extension.swift in Sources */,
 				869C37D72A18976800C1034B /* FreqView.swift in Sources */,
 				8629E5CF2A27976E00F3E8D2 /* ButtonStyles.swift in Sources */,

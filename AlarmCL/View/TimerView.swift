@@ -12,13 +12,19 @@ struct TimerView: View {
     @State private var isRunning = false
     @State private var isShow = false
     @State var time = Date()
-    @State var sec = 0
+    @State var sec = 0.0
     
     var body: some View {
         VStack {
-            DatePicker("", selection: $time, displayedComponents: .hourAndMinute)
-                .datePickerStyle(.wheel)
-                .labelsHidden()
+            ZStack {
+                CustomPicker(sec: $sec)
+                Text("시간")
+                    .offset(x: -70)
+                Text("분")
+                    .offset(x: 23)
+                Text("초")
+                    .offset(x: 125)
+            }
             HStack {
                 Button("취소") {
                     isRunning = false
@@ -33,7 +39,7 @@ struct TimerView: View {
             .padding()
             List {
                 HStack {
-                    Text("타이머 종료 시")
+                    Text("타이머 종료 시\(sec)")
                     Spacer()
                     Button {
                         isShow = true
@@ -61,4 +67,6 @@ struct TimerView_Previews: PreviewProvider {
         TimerView()
     }
 }
+
+
 
