@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GaugeTimerView: View {
     
-    @State var maxSec: Double = 0
+    let maxSec: Double
     @Binding var sec: Double
     @Binding var isRunning: Bool
     
@@ -35,8 +35,6 @@ struct GaugeTimerView: View {
             }.offset(y: 45)
                 .foregroundColor(.gray)
                 .opacity(isRunning ? 1:0.3)
-        }.onAppear() {
-            maxSec = sec
         }
     }
     

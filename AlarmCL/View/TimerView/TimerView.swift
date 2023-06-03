@@ -28,7 +28,7 @@ struct TimerView: View {
                         .offset(x: 125)
                 }.frame(width: 350,height: 350)
             } else {
-                GaugeTimerView(sec: $sec, isRunning: $isRunning)
+                GaugeTimerView(maxSec: countSec, sec: $sec, isRunning: $isRunning)
                     .transition(.opacity)
                     .frame(width: 350,height: 350)
             }
@@ -81,6 +81,20 @@ struct TimerView: View {
             } else {
                 isRunning = false
                 sec = 0
+            }
+        }
+        .onChange(of: isRunning, perform: { newValue in
+            TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, startDate: Date(), isRunning: isRunning)
+        })
+        .onAppear() {
+            let (doubleOne, doubleTwo, date, bool)  = TimerUserDefaultManager.shared.getValues()
+            
+            if let countsec = doubleOne, let sec = doubleTwo,
+                let startdate = date, let isrunning = bool {
+                self.countSec = countsec
+                self.sec = sec
+                self.isRunning = isrunning
+                print("\(startdate)")
             }
         }
     }

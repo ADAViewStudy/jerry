@@ -39,6 +39,7 @@
 		869C37D72A18976800C1034B /* FreqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D62A18976800C1034B /* FreqView.swift */; };
 		86FBF22A2A2B476D00F60645 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBF2292A2B476D00F60645 /* CustomPicker.swift */; };
 		86FBF22C2A2B5C8000F60645 /* GaugeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBF22B2A2B5C8000F60645 /* GaugeTimerView.swift */; };
+		86FBF22F2A2B993200F60645 /* TimerUserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBF22E2A2B993200F60645 /* TimerUserDefaultManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		869C37D62A18976800C1034B /* FreqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreqView.swift; sourceTree = "<group>"; };
 		86FBF2292A2B476D00F60645 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
 		86FBF22B2A2B5C8000F60645 /* GaugeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeTimerView.swift; sourceTree = "<group>"; };
+		86FBF22E2A2B993200F60645 /* TimerUserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerUserDefaultManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				8629E5C72A249E5100F3E8D2 /* WorldTimeCoreData.swift */,
 				86293A1F2A1FBB2600A862CD /* WorldTimes.swift */,
 				8629E5C92A2796A300F3E8D2 /* StopWatchViewModel.swift */,
+				86FBF22E2A2B993200F60645 /* TimerUserDefaultManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				86293A222A1FBD3800A862CD /* AddWorldTime.swift in Sources */,
 				8629E5CD2A27973E00F3E8D2 /* AnalogClockView.swift in Sources */,
 				86293A122A1B9F8A00A862CD /* AlarmsModel.xcdatamodeld in Sources */,
+				86FBF22F2A2B993200F60645 /* TimerUserDefaultManager.swift in Sources */,
 				8677E47D2A20C553003A704C /* Modifier.swift in Sources */,
 				86FBF22A2A2B476D00F60645 /* CustomPicker.swift in Sources */,
 				8629E5C62A249DC000F3E8D2 /* Extension.swift in Sources */,

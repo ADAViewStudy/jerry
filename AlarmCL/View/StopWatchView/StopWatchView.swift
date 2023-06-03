@@ -71,10 +71,10 @@ struct StopWatchView: View {
         }
         .onAppear() {
 //            print("옵셔널 풀기전 = \(stopwatch.count)")
-            guard let stopwatch = stopwatch.first else{ return print("스탑워치에러")}
-            guard let start = stopwatch.startTime else{ return print("시작시간에러")}
-            guard let lapstart = stopwatch.lapStartTime else{ return print("랩시간에러")}
-            guard let laparr = stopwatch.lapArr else{ return print("배열에러")}
+            guard let stopwatch = stopwatch.first,
+                  let start = stopwatch.startTime,
+                  let lapstart = stopwatch.lapStartTime,
+                  let laparr = stopwatch.lapArr else { return }
             viewModel.stopArr = laparr
             
             if stopwatch.isRunning {
