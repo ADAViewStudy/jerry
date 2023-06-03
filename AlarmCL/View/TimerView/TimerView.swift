@@ -39,7 +39,7 @@ struct TimerView: View {
                         sec = 0
                     }
                 }.foregroundColor(.gray)
-                    .opacity(isRunning ? 0.6:0.3)
+                    .opacity(sec > 0 ? 0.6:0.3)
                 Spacer()
                 Button(isRunning ? "일시정지":(sec > 0 ? "재개":"시작")) {
                     withAnimation {
@@ -76,7 +76,6 @@ struct TimerView: View {
         .onReceive(timer) { _ in
             if isRunning && sec > 0 {
                 sec -= 0.01
-                print("\(sec)")
             } else if !isRunning && sec > 0 {
                 isRunning = false
             } else {
