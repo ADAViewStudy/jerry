@@ -28,7 +28,7 @@ struct TimerView: View {
                         .offset(x: 125)
                 }.frame(width: 350,height: 350)
             } else {
-                GaugeTimerView(sec: $sec)
+                GaugeTimerView(sec: $sec, isRunning: $isRunning)
                     .transition(.opacity)
                     .frame(width: 350,height: 350)
             }
