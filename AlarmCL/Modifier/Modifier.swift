@@ -5,35 +5,25 @@
 //  Created by 주환 on 2023/05/26.
 //
 
-//import Foundation
+////import Foundation
 //import SwiftUI
 //
-//struct VerticalIndex: ViewModifier {
-//    let indexableList: [String]
-//    func body(content: Content) -> some View {
-//        var body: some View {
-//            ScrollViewReader { scrollProxy in
-//                ZStack {
-//                    content
-//                    VStack {
-//                        ForEach(indexableList, id: \.self) { letter in
-//                            HStack {
-//                                Spacer()
-//                                Button(action: {
-//                                    withAnimation {
-//                                        scrollProxy.scrollTo(letter)
-//                                    }
-//                                }, label: {
-//                                    Text(letter)
-//                                        .font(.system(size: 12))
-//                                        .padding(.trailing, 7)
-//                                })
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+//// Custom GaugeStyle
+//struct CustomGaugeStyle: GaugeStyle {
+//    func makeBody(configuration: GaugeStyleConfiguration) -> some View {
+//        ZStack {
+//            Circle()
+//                .stroke(Color.gray, lineWidth: 10)
+//                .frame(width: 300, height: 300)
+//                .opacity(0.6)
+//            Circle()
+//                .trim(from: 0, to: CGFloat(configuration.value))
+//                .stroke(Color.accentColor, lineWidth: 10)
+//                .frame(width: 300, height: 300)
+//                .rotationEffect(Angle(degrees: -90))
+//                .opacity(0.6)
+//            Text("\(Int(configuration.value))")
+//                .font(.title)
 //        }
-//        return body
 //    }
 //}

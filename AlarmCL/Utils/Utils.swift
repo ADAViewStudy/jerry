@@ -111,3 +111,16 @@ func stringFromTimeInterval(_ interval: TimeInterval) -> String {
     
     return String(format: "%02d:%02d.%02d", minutes, seconds, milliseconds)
 }
+
+func stringFromTimeIntervalHMS(interval: TimeInterval) -> String {
+    let intervalInt = Int(interval.rounded())
+    let hours = intervalInt / 3600
+    let minutes = (intervalInt % 3600) / 60
+    let seconds = intervalInt % 60
+    
+    if hours > 0 {
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    } else {
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}

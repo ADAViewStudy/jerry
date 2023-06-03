@@ -38,7 +38,7 @@ struct Clock: View {
             }
             Color.clear
             if lapTime != nil {
-                Text("\(stringFromTimeInterval(_:time))")
+                Text("\(stringFromTimeInterval(_: time))")
                     .offset(y: 60)
             }
         }

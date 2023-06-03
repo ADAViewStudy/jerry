@@ -18,7 +18,16 @@ struct CustomPicker: UIViewRepresentable {
         return pickerView
     }
     
-    func updateUIView(_ uiView: UIPickerView, context: Context) {}
+    func updateUIView(_ uiView: UIPickerView, context: Context) {
+        let totalSeconds = Int(sec.wrappedValue)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = totalSeconds % 60
+
+        uiView.selectRow(hours, inComponent: 0, animated: false)
+        uiView.selectRow(minutes, inComponent: 1, animated: false)
+        uiView.selectRow(seconds, inComponent: 2, animated: false)
+    }
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(sec: sec)
@@ -54,14 +63,15 @@ struct CustomPicker: UIViewRepresentable {
             let minIndex = pickerView.selectedRow(inComponent: 1)
             let secIndex = pickerView.selectedRow(inComponent: 2)
             
-            sec.wrappedValue = Double(secIndex+(minIndex*60)+(hourIndex*360))
+            sec.wrappedValue = Double(secIndex+(minIndex*60)+(hourIndex*3600))
         }
     }
 }
 
 
-//struct CustomPicker_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CustomPicker()
-//    }
-//}
+struct CustomPicker_Previews: PreviewProvider {
+    @State static var tempSec: Double = 3600
+    static var previews: some View {
+        CustomPicker(sec: $tempSec)
+    }
+}

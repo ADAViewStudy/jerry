@@ -38,6 +38,7 @@
 		869C37D52A173E0000C1034B /* TimeFomatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D42A173E0000C1034B /* TimeFomatter.swift */; };
 		869C37D72A18976800C1034B /* FreqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869C37D62A18976800C1034B /* FreqView.swift */; };
 		86FBF22A2A2B476D00F60645 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBF2292A2B476D00F60645 /* CustomPicker.swift */; };
+		86FBF22C2A2B5C8000F60645 /* GaugeTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBF22B2A2B5C8000F60645 /* GaugeTimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		869C37D42A173E0000C1034B /* TimeFomatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFomatter.swift; sourceTree = "<group>"; };
 		869C37D62A18976800C1034B /* FreqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreqView.swift; sourceTree = "<group>"; };
 		86FBF2292A2B476D00F60645 /* CustomPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
+		86FBF22B2A2B5C8000F60645 /* GaugeTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaugeTimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,8 +229,7 @@
 				8650D9D22A23319200A962EC /* AlarmView */,
 				8650D9D32A2331B200A962EC /* WorldTimeView */,
 				8629E5CB2A2796F700F3E8D2 /* StopWatchView */,
-				86FBF2292A2B476D00F60645 /* CustomPicker.swift */,
-				869C37C82A13A9D300C1034B /* TimerView.swift */,
+				86FBF22D2A2B8E6600F60645 /* TimerView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +254,16 @@
 				8629E5C52A249DC000F3E8D2 /* Extension.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		86FBF22D2A2B8E6600F60645 /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				869C37C82A13A9D300C1034B /* TimerView.swift */,
+				86FBF2292A2B476D00F60645 /* CustomPicker.swift */,
+				86FBF22B2A2B5C8000F60645 /* GaugeTimerView.swift */,
+			);
+			path = TimerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +404,7 @@
 				86293A242A20921F00A862CD /* WorldTimeListView.swift in Sources */,
 				869C37D52A173E0000C1034B /* TimeFomatter.swift in Sources */,
 				86293A202A1FBB2600A862CD /* WorldTimes.swift in Sources */,
+				86FBF22C2A2B5C8000F60645 /* GaugeTimerView.swift in Sources */,
 				86293A222A1FBD3800A862CD /* AddWorldTime.swift in Sources */,
 				8629E5CD2A27973E00F3E8D2 /* AnalogClockView.swift in Sources */,
 				86293A122A1B9F8A00A862CD /* AlarmsModel.xcdatamodeld in Sources */,
