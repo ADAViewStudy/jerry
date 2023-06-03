@@ -95,7 +95,6 @@ extension DataController {
     func resetStopWatch(stopwatch: StopWatch?, context: NSManagedObjectContext) {
         guard let stopwatch = stopwatch else { return }
         context.delete(stopwatch)
-//        context.remo
         
         save(context: context)
     }

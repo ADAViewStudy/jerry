@@ -32,7 +32,7 @@ struct MainTabView: View {
                     Text("타이머")
                 }
         }
-        .background(Color.black)
+//        .background(Color.black)
     }
 }
 
