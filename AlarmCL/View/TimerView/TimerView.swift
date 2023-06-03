@@ -77,6 +77,8 @@ struct TimerView: View {
             if isRunning && sec > 0 {
                 sec -= 0.01
                 print("\(sec)")
+            } else if !isRunning && sec > 0 {
+                isRunning = false
             } else {
                 isRunning = false
                 sec = 0
