@@ -37,6 +37,7 @@ struct TimerView: View {
                     withAnimation {
                         isRunning = false
                         sec = 0
+                        TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, startDate: Date(), isRunning: isRunning)
                     }
                 }.foregroundColor(.gray)
                     .opacity(sec > 0 ? 0.6:0.3)
