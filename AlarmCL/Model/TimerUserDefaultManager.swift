@@ -19,11 +19,15 @@ class TimerUserDefaultManager {
     private let boolKey = "IsRunning"
     
     // 저장 메서드
-    func save(countSec: Double, sec: Double, startDate: Date, isRunning: Bool) {
+    func save(countSec: Double, sec: Double, startDate: Date? = nil, isRunning: Bool) {
         defaults.set(countSec, forKey: doubleKeyOne)
         defaults.set(sec, forKey: doubleKeyTwo)
-        defaults.set(startDate, forKey: dateKey)
         defaults.set(isRunning, forKey: boolKey)
+        if startDate != nil {
+            defaults.set(startDate, forKey: dateKey)
+        } else {
+//            defaults.removeObject(forKey: dateKey)
+        }
     }
     
     // 값 가져오기 메서드

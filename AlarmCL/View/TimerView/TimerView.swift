@@ -37,7 +37,8 @@ struct TimerView: View {
                     withAnimation {
                         isRunning = false
                         sec = 0
-                        TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, startDate: Date(), isRunning: isRunning)
+                        TimerUserDefaultManager.shared.removeValues()
+                        TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, isRunning: isRunning)
                     }
                 }.foregroundColor(.gray)
                     .opacity(sec > 0 ? 0.6:0.3)
@@ -84,18 +85,27 @@ struct TimerView: View {
                 sec = 0
             }
         }
+        .onChange(of: countSec, perform: { newValue in
+            TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, isRunning: isRunning)
+        })
         .onChange(of: isRunning, perform: { newValue in
-            TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, startDate: Date(), isRunning: isRunning)
+            TimerUserDefaultManager.shared.save(countSec: countSec, sec: sec, startDate: isRunning ? Date():nil, isRunning: isRunning)
         })
         .onAppear() {
             let (doubleOne, doubleTwo, date, bool)  = TimerUserDefaultManager.shared.getValues()
             
             if let countsec = doubleOne, let sec = doubleTwo,
-                let startdate = date, let isrunning = bool {
+                let isrunning = bool {
                 self.countSec = countsec
                 self.sec = sec
                 self.isRunning = isrunning
-                print("\(startdate)")
+            }
+            if let startdate = date, isRunning {
+                let diff = Date().timeIntervalSince(startdate)
+                self.sec -= diff
+                if self.sec <= 0 {
+                    isRunning = false
+                }
             }
         }
     }
