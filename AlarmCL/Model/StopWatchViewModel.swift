@@ -11,16 +11,20 @@ import Combine
 
 class StopwatchViewModel: ObservableObject {
     
-//    @FetchRequest(entity: StopWatch.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \StopWatch.id, ascending: false)]) var stopwatch: FetchedResults<StopWatch>
     // Timer를 위한 publisher와 상태 변수
     @Published var secondsElapsed:TimeInterval = 0
     @Published var timeStops: TimeInterval = 0
     @Published var stopArr: [TimeInterval] = []
     private var timer: AnyCancellable?
     
+    
     // 스탑워치 시작
-    func start(managedObjContext: NSManagedObjectContext) {
-//        DataController.shared.startStopWatch(time: secondsElapsed, laptime: timeStops, arr: stopArr, context: managedObjContext)
+    func start(stopwatch: StopWatch? = nil, managedObjContext: NSManagedObjectContext) {
+        if stopwatch == nil&&(secondsElapsed == 0) {
+            DataController.shared.startStopWatch(time: secondsElapsed, laptime: timeStops, arr: stopArr, context: managedObjContext)
+        } else {
+            DataController.shared.runStopWatch(stopwatch: stopwatch, time: secondsElapsed, laptime: timeStops, arr: stopArr, isRunning: true, context: managedObjContext)
+        }
         timer = Timer.publish(every: 0.01, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
@@ -28,25 +32,26 @@ class StopwatchViewModel: ObservableObject {
                 self?.timeStops += 0.01
             }
     }
-    func save(managedObjContext: NSManagedObjectContext) {
-//        DataController.shared.runStopWatch(stopwatch: stopwatch.first, time: secondsElapsed, laptime: timeStops, arr: stopArr, context: managedObjContext)
+    func save(stopwatch: StopWatch,isRuning: Bool,managedObjContext: NSManagedObjectContext) {
         stopArr.append(timeStops)
         timeStops = 0
+        DataController.shared.lapStopWatch(stopwatch: stopwatch, time: secondsElapsed, laptime: timeStops, arr: stopArr,isRunning: isRuning, context: managedObjContext)
         
     }
     
-    func reset(managedObjContext: NSManagedObjectContext) {
+    func reset(stopwatch: StopWatch,managedObjContext: NSManagedObjectContext) {
         timer?.cancel()
         timer = nil
         secondsElapsed = 0
         timeStops = 0
         stopArr = []
-//        DataController.shared.resetStopWatch(stopwatch: stopwatch.first, context: managedObjContext)
+        DataController.shared.resetStopWatch(stopwatch: stopwatch, context: managedObjContext)
     }
     
     // 스탑워치 정지
-    func stop() {
+    func stop(stopwatch: StopWatch, context: NSManagedObjectContext) {
         timer?.cancel()
+        DataController.shared.runStopWatch(stopwatch: stopwatch, time: secondsElapsed, laptime: timeStops, arr: stopArr, isRunning: false, context: context)
 //        timer = nil
     }
 }
@@ -56,27 +61,41 @@ extension DataController {
     func startStopWatch(time: TimeInterval, laptime: TimeInterval, arr: [TimeInterval], context: NSManagedObjectContext) {
         let stopwatch = StopWatch(context: context)
         stopwatch.id = UUID()
-        stopwatch.lapArr = arr.map{ Double($0) }
-        stopwatch.lapTime = Double(laptime)
-        stopwatch.time = Double(time)
+        stopwatch.lapArr = arr
+        stopwatch.lapTime = laptime
+        stopwatch.time = time
+        stopwatch.isRunning = true
+        stopwatch.startTime = Date()
+        stopwatch.lapStartTime = Date()
         
         save(context: context)
     }
     
-    func runStopWatch(stopwatch: StopWatch?, time: TimeInterval, laptime: TimeInterval, arr: [TimeInterval], context: NSManagedObjectContext) {
+    func lapStopWatch(stopwatch: StopWatch?, time: TimeInterval, laptime: TimeInterval, arr: [TimeInterval],isRunning : Bool , context: NSManagedObjectContext) {
         guard let stopwatch = stopwatch else { return }
-        stopwatch.lapArr = arr.map{ Double($0) }
-        stopwatch.lapTime = Double(laptime)
-        stopwatch.time = Double(time)
+        stopwatch.lapArr = arr
+        stopwatch.lapTime = laptime
+        stopwatch.time = time
+        stopwatch.isRunning = isRunning
+        stopwatch.lapStartTime = Date()
+        
+        save(context: context)
+    }
+    
+    func runStopWatch(stopwatch: StopWatch?, time: TimeInterval, laptime: TimeInterval, arr: [TimeInterval],isRunning : Bool , context: NSManagedObjectContext) {
+        guard let stopwatch = stopwatch else { return }
+        stopwatch.lapArr = arr
+        stopwatch.lapTime = laptime
+        stopwatch.time = time
+        stopwatch.isRunning = isRunning
         
         save(context: context)
     }
     
     func resetStopWatch(stopwatch: StopWatch?, context: NSManagedObjectContext) {
         guard let stopwatch = stopwatch else { return }
-        stopwatch.lapArr = []
-        stopwatch.lapTime = 0
-        stopwatch.time = 0
+        context.delete(stopwatch)
+//        context.remo
         
         save(context: context)
     }

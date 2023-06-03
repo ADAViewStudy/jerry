@@ -37,14 +37,14 @@ struct StopWatchView: View {
             VStack {
                 HStack {
                     Button(!isRunning&&(!(viewModel.secondsElapsed==0)) ? "재설정":"랩") {
-                        isRunning ? viewModel.save(managedObjContext: managedObjContext): viewModel.reset(managedObjContext: managedObjContext)
+                        isRunning ? viewModel.save(stopwatch: stopwatch.first!, isRuning: isRunning,managedObjContext: managedObjContext): viewModel.reset(stopwatch: stopwatch.first!,managedObjContext: managedObjContext)
                     }.foregroundColor(.gray)
 //                        .disabled(!isRunning&&(viewModel.secondsElapsed==0) ? true : false)
                         .opacity(!isRunning&&(viewModel.secondsElapsed==0) ? 0.3:0.6)
                     Spacer()
                     Button(isRunning ? "중단" : "시작") {
                         isRunning.toggle()
-                        isRunning ? viewModel.start(managedObjContext: managedObjContext) : viewModel.stop()
+                        isRunning ? viewModel.start(stopwatch: stopwatch.first ?? nil,managedObjContext: managedObjContext) : viewModel.stop(stopwatch: stopwatch.first!,context: managedObjContext)
                     }.foregroundColor(isRunning ? .red: .green)
                         .opacity(0.6)
                 }.buttonStyle(CircleStyle())
@@ -68,6 +68,31 @@ struct StopWatchView: View {
                 }
                 .listStyle(.plain)
             }.offset(y:-80)
+        }
+        .onAppear() {
+            print("옵셔널 풀기전 = \(stopwatch.count)")
+            guard let stopwatch = stopwatch.first else{ return print("스탑워치에러")}
+            guard let start = stopwatch.startTime else{ return print("시작시간에러")}
+            guard let lapstart = stopwatch.lapStartTime else{ return print("랩시간에러")}
+            guard let laparr = stopwatch.lapArr else{ return print("배열에러")}
+            viewModel.stopArr = laparr
+            
+            if stopwatch.isRunning {
+                isRunning = stopwatch.isRunning
+                viewModel.secondsElapsed = Date().timeIntervalSince(start)
+                viewModel.timeStops = Date().timeIntervalSince(lapstart)
+                viewModel.start(stopwatch: stopwatch,managedObjContext: managedObjContext)
+            } else {
+                isRunning = stopwatch.isRunning
+                viewModel.secondsElapsed = stopwatch.time
+                viewModel.timeStops = stopwatch.lapTime
+            }
+            
+        }
+        .onChange(of: isRunning) { newValue in
+            guard let stopwatch = stopwatch.first else {return}
+            
+//            viewModel
         }
     }
 }
