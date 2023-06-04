@@ -87,7 +87,12 @@ struct StopWatchView: View {
                 viewModel.secondsElapsed = stopwatch.time
                 viewModel.timeStops = stopwatch.lapTime
             }
-            
+        }
+        .onAppear() {
+            selectionIndex = TimerUserDefaultManager.shared.getStopWatchSelection()
+        }
+        .onChange(of: selectionIndex) { newValue in
+            TimerUserDefaultManager.shared.timewatchSelectionSave(selectionNum: newValue)
         }
     }
 }

@@ -9,28 +9,37 @@ import SwiftUI
 
 struct MainTabView: View {
     
+    @State private var selection = 0
+    
     var body: some View {
-        TabView {
+        
+        TabView(selection: $selection) {
             WorldTimeView()
                 .tabItem {
                     Image(systemName: "globe")
                     Text("세계 시계")
-                }
+                }.tag(0)
             AlarmView()
                 .tabItem {
                     Image(systemName: "alarm.fill")
                     Text("알람")
-                }
+                }.tag(1)
             StopWatchView()
                 .tabItem {
                     Image(systemName: "stopwatch.fill")
                     Text("스톱워치")
-                }
+                }.tag(2)
             TimerView()
                 .tabItem {
                     Image(systemName: "timer")
                     Text("타이머")
-                }
+                }.tag(3)
+        }
+        .onAppear() {
+            selection = TimerUserDefaultManager.shared.getSelectionNum()
+        }
+        .onChange(of: selection) { newValue in
+            TimerUserDefaultManager.shared.selectionSave(selectionNum: newValue)
         }
 //        .background(Color.black)
     }

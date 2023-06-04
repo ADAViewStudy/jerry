@@ -17,6 +17,8 @@ class TimerUserDefaultManager {
     private let doubleKeyTwo = "Sec"
     private let dateKey = "StartDate"
     private let boolKey = "IsRunning"
+    private let selectionNum = "SelectionNum"
+    private let timerWatchSelection = "timerWatchSelection"
     
     // 저장 메서드
     func save(countSec: Double, sec: Double, startDate: Date? = nil, isRunning: Bool) {
@@ -30,6 +32,14 @@ class TimerUserDefaultManager {
         }
     }
     
+    func selectionSave(selectionNum: Int) {
+        defaults.set(selectionNum, forKey: self.selectionNum)
+    }
+    func timewatchSelectionSave(selectionNum: Int) {
+        defaults.set(selectionNum, forKey: self.timerWatchSelection)
+    }
+
+    
     // 값 가져오기 메서드
     func getValues() -> (Double?, Double?, Date?, Bool?) {
         let doubleOne = defaults.double(forKey: doubleKeyOne)
@@ -38,6 +48,13 @@ class TimerUserDefaultManager {
         let bool = defaults.bool(forKey: boolKey)
         
         return (doubleOne, doubleTwo, date, bool)
+    }
+    
+    func getSelectionNum() -> Int {
+        return defaults.integer(forKey: selectionNum)
+    }
+    func getStopWatchSelection() -> Int {
+        return defaults.integer(forKey: timerWatchSelection)
     }
     
     // 값 삭제 메서드
